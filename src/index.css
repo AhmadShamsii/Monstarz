@@ -1,0 +1,175 @@
+@import "~antd/dist/antd.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Bigelow+Rules&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Aoboshi+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap");
+body {
+  background-color: #f6f2f8;
+  margin: 0;
+  padding: 0;
+}
+.site-layout-content {
+  min-height: 280px;
+  padding: 24px;
+  background: #fffdfd;
+  margin-left: 200px;
+}
+#components-layout-demo-top .logo {
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.3);
+}
+.layout {
+  padding: 0;
+}
+.ant-row-rtl #components-layout-demo-top .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
+}
+.header-items {
+  padding-left: 40px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: right;
+}
+.deleteuser-icon {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+}
+.edituser-icon {
+  font-size: 20px;
+  display: flex;
+  margin-left: 15px;
+}
+.edituser-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.edit-user-buttons {
+  position: absolute;
+  top: 140%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+}
+.ant-descriptions {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+}
+.sidebar-el {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+}
+.cardlist-page {
+  display: flex;
+  justify-content: start;
+  gap: 2px;
+  margin-left: 10%;
+}
+.monsters-page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 4.5px;
+  margin-left: 9.5%;
+}
+.add-icon:hover {
+  border: 1px solid black;
+  color: black;
+}
+.add-icon:focus {
+  border: 1px solid black;
+  color: black;
+}
+.montser-image-checkout {
+  width: 100px;
+}
+.nft-image img {
+  width: 200px;
+  text-align: center;
+}
+.font-family-primary {
+  font-family: "Bigelow Rules", cursive;
+}
+.font-family-secondary {
+  font-family: "Aoboshi One", serif;
+}
+.font-family-tertiary {
+  font-family: "Henny Penny", cursive;
+  font-weight: 100;
+}
+.dropdown1 {
+  position: fixed;
+  top: 0px;
+  right: 10%;
+}
+.dropdown2 {
+  position: fixed;
+  top: 17px;
+  right: 11%;
+}
+.dropdown3 {
+  position: fixed;
+  top: 15px;
+  right: 10%;
+}
+.ant-carousel .slick-dots li button {
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  z-index: 1;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+  background-color: #f8f9fa;
+}
+
+.slider {
+  margin: auto;
+  clip-path: polygon(0 0, 100% 0, 100% 100vh, 0% 120vh);
+  background: linear-gradient(
+    315deg,
+    #372343 3%,
+    #0d3b66 38%,
+    #1767b2 68%,
+    #092743 98%
+  );
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+  background-attachment: fixed;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+.pathclip {
+  clip-path: polygon(0 45%, 100% 0%, 100% 100%, 0 100%);
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #0d3b66;
+}
+.primary-font {
+  font-size: 45px;
+}
+.ant-menu-item .ant-menu-item-selected .ant-menu-item-only-child{
+  background-color: #f6f2f8;
+}
