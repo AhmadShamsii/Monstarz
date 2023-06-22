@@ -1,4 +1,4 @@
-import { Space, Typography, Button, Input, Form } from "antd";
+import { Space, Typography, Button, Input, Form, message } from "antd";
 import {
   EnvironmentOutlined,
   MailOutlined,
@@ -7,12 +7,46 @@ import {
 import { Link } from "react-router-dom";
 const Text = Typography;
 const Title = Typography;
+
+const validateMessages = {
+  required: "${label} is required!",
+  types: {
+    email: "${label} is not a valid email!",
+  },
+};
+
 const Foooter = ({ margintop }) => {
+  const [form] = Form.useForm();
+  const [messageApi, contextHolder] = message.useMessage();
+  const key = "updatable";
+
   const validateMessages = {
     required: "${label} is required!",
     types: {
       email: "${label} is not a valid email!",
     },
+  };
+
+  const openMessage = (values) => {
+    if (!values) return;
+    messageApi.open({
+      key,
+      type: "loading",
+      content: "Loading...",
+    });
+    setTimeout(() => {
+      messageApi.open({
+        key,
+        type: "success",
+        content: "Email sent successfully!",
+        duration: 2,
+      });
+    }, 1000);
+  };
+
+  const onFinish = (values) => {
+    form.resetFields();
+    openMessage(values);
   };
   return (
     <Space
@@ -104,27 +138,46 @@ const Foooter = ({ margintop }) => {
             marginTop: "20px",
           }}
         >
-          <Input
-            type="email"
-            style={{
-              borderRadius: "40px 0 0 40px",
-              height: "40px",
-              border: "1px solid black",
-            }}
-            placeholder="Your email address"
-          />
-
-          <Button
-            htmlType="submit"
-            style={{
-              borderRadius: " 0 40px 40px 0",
-              height: "40px",
-              backgroundColor: "#0d3b66",
-              color: "#F6F2F8",
-            }}
+          <Form
+            name="nest-messages"
+            onFinish={onFinish}
+            form={form}
+            style={{ display: "flex" }}
+            validateMessages={validateMessages}
           >
-            Subscribe
-          </Button>
+            <Form.Item
+              name="Email"
+              rules={[
+                {
+                  required: true,
+                  type: "email",
+                },
+              ]}
+            >
+              <Input
+                style={{
+                  borderRadius: "40px 0 0 40px",
+                  height: "40px",
+                  border: "1px solid black",
+                }}
+                placeholder="Your email address"
+              />
+            </Form.Item>
+            <Form.Item>
+              {contextHolder}
+              <Button
+                htmlType="submit"
+                style={{
+                  borderRadius: " 0 40px 40px 0",
+                  height: "40px",
+                  backgroundColor: "#0d3b66",
+                  color: "#F6F2F8",
+                }}
+              >
+                Subscribe
+              </Button>
+            </Form.Item>
+          </Form>
         </Space.Compact>
       </div>
     </Space>

@@ -1,8 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
-import { usersSelector } from "../../app/users/selector";
-import { incrementQuantity, decrementQuantity } from "../../app/users/slice";
+import { StyledPageHeader } from "../about/styles";
+import { productsSelector } from "../../app/products/selector";
+import { incrementQuantity, decrementQuantity } from "../../app/products/slice";
 import { useRef, useEffect } from "react";
-import Foooter from "../../components/footer/footer";
+import Foooter from "../../components/footer";
+import {
+  createOrder,
+  cartClearAll,
+  recordOrders,
+} from "../../app/products/slice";
 import {
   Card,
   PageHeader,
@@ -11,7 +17,6 @@ import {
   Divider,
   Avatar,
   message,
-  Space,
 } from "antd";
 import {
   CaretUpOutlined,
@@ -19,72 +24,42 @@ import {
   ArrowLeftOutlined,
 } from "@ant-design/icons";
 import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const { Text, Title } = Typography;
 
 const Checkout = () => {
-  const { cart } = useSelector(usersSelector);
+  const navigate = useNavigate();
+
+  const { cart, order } = useSelector(productsSelector);
   const dispatch = useDispatch();
   const { category } = useParams();
   const [messageApi, contextHolder] = message.useMessage();
   const key = "updatable";
 
-  const DelayedLink = ({ delay, to, children, ...props }) => {
-    const timerRef = useRef<NodeJS.Timeout | undefined>();
+  useEffect(() => {
+    dispatch(recordOrders(order));
+  }, [order]);
 
-    useEffect(() => {
-      return () => {
-        if (timerRef.current) {
-          clearTimeout(timerRef.current);
-        }
-      };
-    }, []);
+  const handleOrder = () => {
+    dispatch(createOrder());
+    dispatch(cartClearAll());
 
-    const clickHandler = () => {
-      timerRef.current = setTimeout(() => {
-        window.location.href = to;
-      }, delay);
-    };
-    const openMessage = () => {
-      console.log("openmessage");
+    messageApi.open({
+      key,
+      type: "loading",
+      content: "Loading...",
+    });
+    setTimeout(() => {
       messageApi.open({
         key,
-        type: "loading",
-        content: "Loading... Please wait",
-        style: {
-          fontSize: "18px",
-        },
+        type: "success",
+        content: "Loaded!",
+        duration: 2,
       });
-      setTimeout(() => {
-        messageApi.open({
-          key,
-          type: "success",
-          content: "Payment done! Thank you for shopping with us.",
-          duration: 2,
-          style: {
-            fontSize: "18px",
-          },
-        });
-        clickHandler();
-      }, 1000);
-    };
-    return (
-      <Button
-        {...props}
-        onClick={openMessage}
-        style={{
-          width: "300px",
-          height: "50px",
-          position: "absolute",
-          left: "50%",
-          transform: "translateX(-50%)",
-          backgroundColor: "#0d3b66",
-        }}
-        size="large"
-        type="primary"
-      >
-        {children}
-      </Button>
-    );
+    }, 1000);
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   };
 
   const calculateTotalQuantity = () => {
@@ -92,7 +67,7 @@ const Checkout = () => {
   };
   return (
     <div style={{ marginTop: "110px" }}>
-      <Link to={`/shop/${category}`}>
+      <Link to={`/shop`}>
         <ArrowLeftOutlined
           style={{
             fontSize: "16px",
@@ -103,13 +78,10 @@ const Checkout = () => {
           }}
         />
       </Link>
-      <PageHeader
-        className="font-family-tertiary"
-        style={{ marginTop: "50px", marginLeft: "10.5%" }}
-        title="Checkout"
-      />
+      <StyledPageHeader title="Checkout" />
       <Divider />
-      <Card className="font-family-tertiary"
+      <Card
+        className="font-family-tertiary"
         style={{
           width: "80%",
           marginLeft: "10%",
@@ -123,7 +95,7 @@ const Checkout = () => {
         <div>
           <Text style={{ marginLeft: "30px" }}>Character</Text>
           <Text style={{ marginLeft: "190px" }}>Name</Text>
-          <Text style={{ marginLeft: "220px" }}>Qantity X Price</Text>
+          <Text style={{ marginLeft: "315px" }}>Qantity X Price</Text>
           <Text style={{ position: "absolute", right: "72px" }}>Total</Text>
         </div>
       </Card>
@@ -211,9 +183,21 @@ const Checkout = () => {
       </Title>
       <Divider></Divider>
       {contextHolder}
-      <DelayedLink delay={3000} to="/shop">
+      <Button
+        style={{
+          width: "300px",
+          height: "50px",
+          position: "absolute",
+          left: "50%",
+          transform: "translateX(-50%)",
+          backgroundColor: "#0d3b66",
+          color: "white",
+          fontSize: "20px",
+        }}
+        onClick={handleOrder}
+      >
         Add Payment
-      </DelayedLink>
+      </Button>
       <Foooter margintop="150px" />
     </div>
   );

@@ -106,8 +106,7 @@ body {
   font-family: "Aoboshi One", serif;
 }
 .font-family-tertiary {
-  font-family: "Henny Penny", cursive;
-  font-weight: 100;
+  font-family: "Bigelow Rules", cursive;
 }
 .dropdown1 {
   position: fixed;
@@ -135,21 +134,6 @@ body {
   background-color: #f8f9fa;
 }
 
-.slider {
-  margin: auto;
-  clip-path: polygon(0 0, 100% 0, 100% 100vh, 0% 120vh);
-  background: linear-gradient(
-    315deg,
-    #372343 3%,
-    #0d3b66 38%,
-    #1767b2 68%,
-    #092743 98%
-  );
-  animation: gradient 15s ease infinite;
-  background-size: 400% 400%;
-  background-attachment: fixed;
-}
-
 @keyframes gradient {
   0% {
     background-position: 0% 0%;
@@ -161,15 +145,17 @@ body {
     background-position: 0% 0%;
   }
 }
-.pathclip {
-  clip-path: polygon(0 45%, 100% 0%, 100% 100%, 0 100%);
-}
+
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
   background-color: #0d3b66;
 }
 .primary-font {
   font-size: 45px;
 }
-.ant-menu-item .ant-menu-item-selected .ant-menu-item-only-child{
+.ant-menu-item .ant-menu-item-selected .ant-menu-item-only-child {
   background-color: #f6f2f8;
+}
+.page-header {
+  font-size: 25px;
+  font-family: "Bigelow Rules", cursive;
 }

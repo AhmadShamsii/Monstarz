@@ -1,16 +1,16 @@
 import { Card, PageHeader, Divider, Typography } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-
+import { StyledPageHeader } from "../about/styles";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { usersSelector } from "../../app/users/selector";
-import Foooter from "../../components/footer/footer";
+import { productsSelector } from "../../app/products/selector";
+import Foooter from "../../components/footer";
 const { Text } = Typography;
 
 const Shop = () => {
   const dispatch = useDispatch();
-  const { usersData } = useSelector(usersSelector);
-  const data = usersData;
+  const { productsData } = useSelector(productsSelector);
+  const data = productsData;
 
   return (
     <div style={{ marginTop: "110px" }}>
@@ -25,10 +25,7 @@ const Shop = () => {
           }}
         />
       </Link>
-      <PageHeader className="font-family-tertiary"
-        title="Categories"
-        style={{ marginTop: "50px", marginLeft: "10.5%"}}
-      />
+      <StyledPageHeader title="Categories" />
       <Divider />
       <div className="cardlist-page">
         <Link to="monsters">

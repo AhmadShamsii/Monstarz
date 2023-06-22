@@ -4,17 +4,16 @@ import { fetchUsersRequest, fetchUsersSuccess } from "./slice";
 import axios from "axios";
 
 export function* usersSaga() {
-  yield takeEvery(fetchUsersRequest.type, workGetUsersFetch);
+  yield takeEvery(fetchUsersRequest, workGetUsersFetch);
 }
 
 function* workGetUsersFetch(): any {
   const response = yield call(
     axios.get,
-    "https://api.slingacademy.com/v1/sample-data/users?offset=0&limit=40"
+    "https://randomuser.me/api/?results=50"
   );
-  const users: User[] = response.data.users;
-  yield put(fetchUsersSuccess(users));
-
+  const users: User[] = response.data.results;
   console.log(users);
+  yield put(fetchUsersSuccess(users));
 }
 export default usersSaga;

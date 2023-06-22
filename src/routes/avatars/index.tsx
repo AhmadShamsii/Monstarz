@@ -1,4 +1,5 @@
 import { Card, PageHeader, Row, Divider, Button, Typography } from "antd";
+import { StyledPageHeader } from "../about/styles";
 import {
   HeartOutlined,
   PlusCircleOutlined,
@@ -8,27 +9,26 @@ import {
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import { nftsSelector } from "../../app/nft/selector";
-import { usersSelector } from "../../app/users/selector";
+import { productsSelector } from "../../app/products/selector";
 
 import {
   addToFavourites,
   removeFromFavourites,
   setFavColor,
   addToCart,
-} from "../../app/users/slice";
-import ItemModal from "../../components/itemModal/itemModal";
+} from "../../app/products/slice";
+import ItemModal from "../../components/itemModal";
 import { useState } from "react";
-import Foooter from "../../components/footer/footer";
+import Foooter from "../../components/footer";
 const { Meta } = Card;
 const Text = Typography;
 
 const Avatars = () => {
   const dispatch = useDispatch();
-  const { usersData } = useSelector(usersSelector);
-  const { favourites, iconColor } = useSelector(usersSelector);
+  const { avatars, favourites, iconColor } = useSelector(productsSelector);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cardClicked, setCardClicked] = useState("");
-  const data = usersData.slice(25, 32);
+  const data = avatars;
 
   const handleFavourite = (index) => {
     const favouriteExists = favourites.includes(index);
@@ -62,11 +62,7 @@ const Avatars = () => {
           }}
         />
       </Link>
-      <PageHeader
-        className="font-family-tertiary"
-        title="Avatars"
-        style={{ marginTop: "50px", marginLeft: "10.5%" }}
-      />
+      <StyledPageHeader title="Avatars" />
       {/* <CartDropDown /> */}
       <Divider />
       <div className="monsters-page">
@@ -140,7 +136,7 @@ const Avatars = () => {
                   >
                     {`${user.first_name}  ${user.last_name}`}
                   </Text>
-                  <Text>{user.gender}</Text>
+                  <Text>{user.phone.slice(0, 1)}</Text>
                 </Card>
               </Row>
             </div>

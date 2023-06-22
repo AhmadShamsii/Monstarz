@@ -1,4 +1,5 @@
 import { Card, PageHeader, Row, Divider, Button, Typography } from "antd";
+import { StyledPageHeader } from "../about/styles";
 import {
   HeartOutlined,
   PlusCircleOutlined,
@@ -6,29 +7,27 @@ import {
   HeartFilled,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { addToCart } from "../../app/users/slice";
+import { addToCart } from "../../app/products/slice";
 import { useDispatch, useSelector } from "react-redux";
 // import { nftsSelector } from "../../app/nft/selector";
-import { usersSelector } from "../../app/users/selector";
+import { productsSelector } from "../../app/products/selector";
 
 import {
   addToFavourites,
   removeFromFavourites,
   setFavColor,
-} from "../../app/users/slice";
-import ItemModal from "../../components/itemModal/itemModal";
+} from "../../app/products/slice";
+import ItemModal from "../../components/itemModal";
 import { useState } from "react";
-import Foooter from "../../components/footer/footer";
-const { Meta } = Card;
+import Foooter from "../../components/footer";
 const Text = Typography;
 
 const Robots = () => {
   const dispatch = useDispatch();
-  const { usersData } = useSelector(usersSelector);
-  const { favourites, iconColor } = useSelector(usersSelector);
+  const { favourites, iconColor, robots } = useSelector(productsSelector);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cardClicked, setCardClicked] = useState("");
-  const data = usersData.slice(10, 25);
+  const data = robots;
 
   const handleFavourite = (index) => {
     const favouriteExists = favourites.includes(index);
@@ -62,11 +61,8 @@ const Robots = () => {
           }}
         />
       </Link>
-      <PageHeader
-        className="font-family-tertiary"
-        title="Robots"
-        style={{ marginTop: "50px", marginLeft: "10.5%" }}
-      />
+      <StyledPageHeader title="Robots" />
+
       <Divider />
       <div className="monsters-page">
         {data.map((user) => {
@@ -139,7 +135,7 @@ const Robots = () => {
                   >
                     {`${user.first_name}  ${user.last_name}`}
                   </Text>
-                  <Text>{user.gender}</Text>
+                  <Text>{user.phone.slice(0, 1)}</Text>
                 </Card>
               </Row>
             </div>

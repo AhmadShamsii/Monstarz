@@ -12,25 +12,26 @@ import {
   PlusCircleOutlined,
   ArrowLeftOutlined,
 } from "@ant-design/icons";
+import { StyledPageHeader } from "../about/styles";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { usersSelector } from "../../app/users/selector";
+import { productsSelector } from "../../app/products/selector";
 import { useState } from "react";
 import {
   addToFavourites,
   removeFromFavourites,
   setFavColor,
   addToCart,
-} from "../../app/users/slice";
-import ItemModal from "../../components/itemModal/itemModal";
-import Foooter from "../../components/footer/footer";
+} from "../../app/products/slice";
+import ItemModal from "../../components/itemModal";
+import Foooter from "../../components/footer";
 const Text = Typography;
 const Monsters = () => {
   const dispatch = useDispatch();
-  const { usersData, favourites, iconColor } = useSelector(usersSelector);
+  const { monsters, favourites, iconColor } = useSelector(productsSelector);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cardClicked, setCardClicked] = useState("");
-  const data = usersData.slice(0, 10);
+  const data = monsters;
   console.log(data);
   const handleFavourite = (index) => {
     const favouriteExists = favourites.includes(index);
@@ -65,13 +66,9 @@ const Monsters = () => {
           }}
         />
       </Link>
-      <PageHeader
-        className="font-family-tertiary"
-        title="Monsters"
-        style={{ marginTop: "50px", marginLeft: "10.5%" }}
-      />
-      <Divider />
+      <StyledPageHeader title="Monsters" />
 
+      <Divider />
       <div className="monsters-page">
         {data.map((user) => {
           const index = user;
@@ -144,7 +141,7 @@ const Monsters = () => {
                   >
                     {`${user.first_name}  ${user.last_name}`}
                   </Text>
-                  <Text>{user.gender}</Text>
+                  <Text>{user.phone.slice(0, 1)}</Text>
                 </Card>
               </Row>
             </div>

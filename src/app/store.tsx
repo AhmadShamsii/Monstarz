@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 
+import productsReducer from "./products/slice";
 import usersReducer from "./users/slice";
-// import nftReducer from "./nft/slice";
 
 import rootSaga from "./rootSage";
 
@@ -10,8 +10,8 @@ const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
   reducer: {
+    products: productsReducer,
     users: usersReducer,
-    // nfts: nftReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

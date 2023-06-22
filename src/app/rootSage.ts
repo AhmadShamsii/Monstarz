@@ -1,12 +1,12 @@
 import { fork, all } from "redux-saga/effects";
 
+import productsSaga from "./products/saga";
 import usersSaga from "./users/saga";
-// import nftSaga from "./nft/saga";
 
 function* rootSaga() {
   yield all([
-    fork(usersSaga),
-    //  fork(nftSaga)
+    fork(productsSaga),
+    fork(usersSaga)
   ]);
 }
 

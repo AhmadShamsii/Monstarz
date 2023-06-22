@@ -1,76 +1,95 @@
 import Sidebar from "../../components/sidebar";
-import { PageHeader, Card, Button, Table, Avatar, Input, Tag } from "antd";
+import {
+  PageHeader,
+  Card,
+  Button,
+  Table,
+  Avatar,
+  Input,
+  Tag,
+  Typography,
+  Space,
+} from "antd";
 
 import { useState, useEffect } from "react";
 
 import DeleteUser from "../../components/deleteUser";
-import AddAndEdit from "../../components/addAndEditProduct";
+import AddAndEditCustomer from "../../components/addAndEditCustomer";
 
 import { EditTwoTone, SearchOutlined } from "@ant-design/icons";
 
-import { Product } from "../../app/products/types";
+import { User } from "../../app/users/types";
 
-import { productsSelector } from "../../app/products/selector";
+import { usersSelector } from "../../app/users/selector";
 import { useSelector } from "react-redux";
 
-const Products = () => {
-  const { productsData } = useSelector(productsSelector);
-  const [fetchedData, setFetchedData] = useState<Product[]>([]);
+const Text = Typography;
+const Title = Typography;
+
+const Customers = () => {
+  const { usersData } = useSelector(usersSelector);
+  const [fetchedData, setFetchedData] = useState<User[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [operation, setOperation] = useState("");
   const [index, setIndex] = useState("");
 
   const [searchField, setSearchField] = useState("");
-  const [filteredproducts, setFilteredproducts] = useState(productsData);
+  const [filteredusers, setFilteredusers] = useState(usersData);
 
-  let set;
   const columns = [
     {
-      title: "Product",
+      title: "Name",
+      width: "35%",
       render: (_, record) => {
-        if (record.id > 0 && record.id <= 10) {
-          set = 2;
-        } else if (record.id > 10 && record.id <= 25) {
-          set = 1;
-        } else if (record.id > 25 && record.id <= 32) {
-          set = 5;
-        } else if (record.id > 32 && record.id <= 40) {
-          set = 3;
-        }
         return (
-          <Avatar
-            size={64}
-            style={{ width: "100px", marginLeft: "30px" }}
-            src={`https://robohash.org/${record.id}?set=set${set}`}
-          />
+          <Space>
+            <Avatar
+              shape="square"
+              size={54}
+              style={{
+                width: "60px",
+                borderRadius: "10px",
+              }}
+              src={record.picture.medium}
+            />
+            <Space
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "start",
+                padding: "0",
+                paddingLeft: "10px",
+              }}
+            >
+              <Title
+                style={{ fontSize: "15px", fontWeight: "bold" }}
+              >{`${record.name.title}.  ${record.name.first}  ${record.name.last}`}</Title>
+              <Text>{record.email}</Text>
+            </Space>
+          </Space>
         );
       },
 
-      key: "product",
-    },
-    {
-      title: "Name",
-      render: (_, record) => `${record.first_name} ${record.last_name}`,
       key: "name",
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
+      title: "Registered",
+      render: (_, record) => (
+        <Text>
+          {record.registered.date.slice(0, record.registered.date.indexOf("T"))}
+        </Text>
+      ),
+      key: "registered",
     },
     {
-      title: "Category",
-      render: (_, record) => {
-        if (record.id > 0 && record.id <= 10) {
-          return <Tag color="red">Monster</Tag>;
-        } else if (record.id > 10 && record.id <= 25) {
-          return <Tag color="green">Robot</Tag>;
-        } else if (record.id > 25 && record.id <= 32) {
-          return <Tag color="blue">Avatar</Tag>;
-        } else if (record.id > 32 && record.id <= 40) {
-          return <Tag color="purple">Robo Head</Tag>;
-        }
-      },
+      title: "City",
+      render: (_, record) => <Text>{record.location.city}</Text>,
+      key: "city",
+    },
+    {
+      title: "Country",
+      render: (_, record) => <Text>{record.location.country}</Text>,
+      key: "country",
     },
     {
       title: "Actions",
@@ -90,8 +109,8 @@ const Products = () => {
   ];
 
   useEffect(() => {
-    setFetchedData(productsData);
-  }, [productsData]);
+    setFetchedData(usersData);
+  }, [usersData]);
 
   const showModalAdd = () => {
     setIsModalOpen(true);
@@ -104,17 +123,17 @@ const Products = () => {
   };
 
   useEffect(() => {
-    const newFilteredproducts = productsData.filter((product) => {
-      console.log(
-        product.first_name.toLocaleLowerCase().startsWith(searchField)
+    const newFilteredUsers = usersData.filter((product) => {
+      return (
+        product.name.first?.toLocaleLowerCase().startsWith(searchField) ||
+        product.name.last?.toLocaleLowerCase().startsWith(searchField)
       );
-      return product.first_name.toLocaleLowerCase().startsWith(searchField);
     });
-    setFilteredproducts(newFilteredproducts);
-  }, [productsData, searchField]);
+    setFilteredusers(newFilteredUsers);
+  }, [usersData, searchField]);
 
   const onSearchChange = (event) => {
-    const searchFieldString = event.target.value.toLocaleLowerCase();
+    const searchFieldString = event.target.value?.toLocaleLowerCase();
     setSearchField(searchFieldString);
   };
 
@@ -123,7 +142,7 @@ const Products = () => {
       <Sidebar />
       <div>
         <PageHeader
-          title="Products"
+          title="Customers"
           style={{
             marginTop: "55px",
             marginLeft: "17%",
@@ -152,7 +171,7 @@ const Products = () => {
               type="search"
               style={{ width: "350px", height: "30px", borderRadius: "5px" }}
               prefix={<SearchOutlined />}
-              placeholder=" Search Products"
+              placeholder=" Search Customers"
               onChange={onSearchChange}
             />
             <Button
@@ -163,12 +182,12 @@ const Products = () => {
               type="primary"
               onClick={showModalAdd}
             >
-              Add Product
+              Add Customer
             </Button>
           </div>
-          <AddAndEdit
+          <AddAndEditCustomer
             record={index}
-            users={productsData}
+            users={usersData}
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
             operation={operation}
@@ -177,9 +196,9 @@ const Products = () => {
             style={{ paddingBottom: "50px" }}
             columns={columns}
             size="small"
-            pagination={{ position: ["bottomCenter"], pageSize: 8 }}
+            pagination={{ position: ["bottomCenter"], pageSize: 10 }}
             bordered={true}
-            dataSource={filteredproducts}
+            dataSource={filteredusers}
           ></Table>
         </div>
       </Card>
@@ -187,4 +206,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Customers;

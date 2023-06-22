@@ -1,12 +1,12 @@
 import { Layout, Menu, Badge, Space } from "antd";
 import { HeartFilled, HeartOutlined, UserOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { usersSelector } from "../../app/users/selector";
+import { productsSelector } from "../../app/products/selector";
 import {
   addToFavourites,
   removeFromFavourites,
   setFavColor,
-} from "../../app/users/slice";
+} from "../../app/products/slice";
 
 import {
   ShoppingCartOutlined,
@@ -21,21 +21,19 @@ import {
   incrementQuantity,
   decrementQuantity,
   switchUser,
-} from "../../app/users/slice";
+} from "../../app/products/slice";
 import { useState } from "react";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 const { Header } = Layout;
 
 const Nav = () => {
-  const { cart, favourites, iconColor, admin } = useSelector(usersSelector);
+  const { cart, favourites, iconColor, admin } = useSelector(productsSelector);
 
   const [isCartDropdownOpen, setIsCartDropdownOpen] = useState(false);
   const [isFavDropdownOpen, setIsFavDropdownOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const dispatch = useDispatch();
-  const location = useLocation();
 
-  console.log(admin);
   const { Title, Text } = Typography;
 
   const customCartItems = cart.map((item) => {
@@ -145,14 +143,12 @@ const Nav = () => {
         <div
           className="font-family-tertiary"
           style={{
-            // color: "#f8f9fa",
             display: "flex",
-            fontSize: "20px",
+            fontSize: "25px",
             position: "absolute",
             left: "50%",
             transform: "translateX(-50%)",
             paddingTop: "10px",
-            // backgroundColor: "#0d3b66",
           }}
         >
           <Menu.Item key="home">
@@ -219,22 +215,43 @@ const Nav = () => {
                     Switch user
                   </Title>
                   <Divider />
-                  <Button
-                    style={{
-                      position: "relative",
-                      top: "50%",
-                      left: "50%",
-                      transform: "translate(-50%,-50%)",
-                      backgroundColor: "#0d3b66",
-                      color: "white",
-                    }}
-                    onClick={() => {
-                      setIsUserDropdownOpen(false);
-                      dispatch(switchUser());
-                    }}
-                  >
-                    Switch to {admin ? "User" : "Admin"}
-                  </Button>
+                  {admin ? (
+                    <Link to="/">
+                      <Button
+                        style={{
+                          position: "relative",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%,-50%)",
+                          backgroundColor: "#0d3b66",
+                          color: "white",
+                        }}
+                        onClick={() => {
+                          setIsUserDropdownOpen(false);
+                          dispatch(switchUser());
+                        }}
+                      >
+                        Switch to {admin ? "User" : "Admin"}
+                      </Button>
+                    </Link>
+                  ) : (
+                    <Button
+                      style={{
+                        position: "relative",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%,-50%)",
+                        backgroundColor: "#0d3b66",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        setIsUserDropdownOpen(false);
+                        dispatch(switchUser());
+                      }}
+                    >
+                      Switch to {admin ? "User" : "Admin"}
+                    </Button>
+                  )}
                 </Menu>
               }
             >
@@ -425,7 +442,7 @@ const Nav = () => {
                   )}
                   <Divider style={{ margin: "6px 0" }}></Divider>
                   {cart.length > 0 ? (
-                    <Link to={`${location.pathname}/checkout`}>
+                    <Link to="checkout">
                       <Button
                         style={{
                           position: "absolute",

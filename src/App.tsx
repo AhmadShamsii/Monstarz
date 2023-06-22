@@ -2,13 +2,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { fetchProductsRequest } from "./app/products/slice";
 import { fetchUsersRequest } from "./app/users/slice";
-// import { fetchNftsRequest } from "./app/nft/slice";
 
-import Layout from "./components/layout/layout";
+import Layout from "./components/layout";
 import About from "./routes/about";
 import Contact from "./routes/contact";
-import Home from "./components/home/home";
+import Home from "./components/home";
 import Monsters from "./routes/monsters";
 import Shop from "./routes/shop";
 import Robots from "./routes/robots";
@@ -17,11 +17,14 @@ import RoboHeads from "./routes/roboHeads";
 import Checkout from "./routes/checkout";
 import Analytics from "./routes/analytics";
 import Products from "./routes/products";
-import Category from "./routes/category";
+import Customers from "./routes/customers";
+import Orders from "./routes/orders";
+import OrderDetails from "./routes/orderDetails";
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(fetchProductsRequest());
     dispatch(fetchUsersRequest());
   }, []);
 
@@ -37,10 +40,12 @@ const App = () => {
         <Route path="shop/robots" element={<Robots />} />
         <Route path="shop/avatars" element={<Avatars />} />
         <Route path="shop/roboHeads" element={<RoboHeads />} />
-        <Route path={"shop/:category/checkout"} element={<Checkout />} />
+        <Route path={"checkout"} element={<Checkout />} />
         <Route path={"/analytics"} element={<Analytics />} />
         <Route path={"/analytics/products"} element={<Products />} />
-        <Route path={"/analytics/category"} element={<Category />} />
+          <Route path={"/analytics/customers"} element={<Customers />} />
+        <Route path={"/analytics/orders"} element={<Orders />} />
+        <Route path={"/analytics/orders/:orderId"} element={<OrderDetails />} />
       </Routes>
     </BrowserRouter>
   );

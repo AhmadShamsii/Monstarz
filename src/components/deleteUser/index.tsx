@@ -8,7 +8,7 @@ const showDeleteConfirm = (index, data) => {
   const dispatch = useDispatch();
   return (
     <Popconfirm
-      title="Are you sure delete this task?"
+      title="Are you sure delete this product?"
       icon={<ExclamationCircleFilled />}
       okText="Yes"
       okType="danger"

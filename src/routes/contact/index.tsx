@@ -1,9 +1,11 @@
 import React from "react";
-import { Button, Form, Input, Typography, PageHeader, Divider } from "antd";
+import { Button, Form, Input, Typography, Space, Divider } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import Foooter from "../../components/footer/footer";
-const Text = Typography
+import Foooter from "../../components/footer";
+import { StyledArrowLeftOutlined, StyledPageHeader } from "../about/styles";
+import { StyledText, StyledForm } from "./styles";
+const Text = Typography;
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -24,45 +26,17 @@ const onFinish = (values: any) => {
 };
 
 const Contact: React.FC = () => (
-  <div style={{ marginTop: "110px" }}>
+  <>
     <Link to="/">
-      <ArrowLeftOutlined
-        style={{
-          fontSize: "16px",
-          position: "absolute",
-          top: "149px",
-          left: "10%",
-          color: "black",
-        }}
-      />
+      <StyledArrowLeftOutlined />
     </Link>
-    <PageHeader
-      className="font-family-tertiary"
-      title="Contact"
-      style={{ marginTop: "113px", marginLeft: "10.5%" }}
-    />
+    <StyledPageHeader title="Contact" />
     <Divider />
-    <Text className="font-family-tertiary"
-      style={{
-        position: "absolute",
-        left: "50%",
-        transform: "translateX(-50%)",
-        fontSize: "25px"
-      }}
-    >
-      Get in Touch!
-    </Text>
-    <Form
+    <StyledText>Get in Touch!</StyledText>
+    <StyledForm
       {...layout}
       name="nest-messages"
       onFinish={onFinish}
-      style={{
-        position: "absolute",
-        left: "45%",
-        transform: "translateX(-50%)",
-        width: "50%",
-        marginTop: "70px",
-      }}
       validateMessages={validateMessages}
     >
       <Form.Item
@@ -92,9 +66,9 @@ const Contact: React.FC = () => (
           Submit
         </Button>
       </Form.Item>
-    </Form>
+    </StyledForm>
     <Foooter margintop="480px" />
-  </div>
+  </>
 );
 
 export default Contact;

@@ -1,4 +1,6 @@
 import { Card, PageHeader, Row, Divider, Button, Typography } from "antd";
+import { StyledPageHeader } from "../about/styles";
+
 import {
   HeartOutlined,
   PlusCircleOutlined,
@@ -6,29 +8,28 @@ import {
   HeartFilled,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { addToCart } from "../../app/users/slice";
+import { addToCart } from "../../app/products/slice";
 import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 // import { nftsSelector } from "../../app/nft/selector";
-import { usersSelector } from "../../app/users/selector";
+import { productsSelector } from "../../app/products/selector";
 import {
   addToFavourites,
   removeFromFavourites,
   setFavColor,
-} from "../../app/users/slice";
-import ItemModal from "../../components/itemModal/itemModal";
-import Foooter from "../../components/footer/footer";
+} from "../../app/products/slice";
+import ItemModal from "../../components/itemModal";
+import Foooter from "../../components/footer";
 const { Meta } = Card;
 const Text = Typography;
 
 const RoboHeads = () => {
   const dispatch = useDispatch();
-  const { usersData } = useSelector(usersSelector);
-  const { favourites, iconColor } = useSelector(usersSelector);
+  const { roboHeads, favourites, iconColor } = useSelector(productsSelector);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cardClicked, setCardClicked] = useState("");
-  const data = usersData.slice(32, 40);
+  const data = roboHeads;
 
   const handleFavourite = (index) => {
     const favouriteExists = favourites.includes(index);
@@ -63,11 +64,7 @@ const RoboHeads = () => {
           }}
         />
       </Link>
-      <PageHeader
-        className="font-family-tertiary"
-        title="Robo Heads"
-        style={{ marginTop: "50px", marginLeft: "10.5%" }}
-      />
+      <StyledPageHeader title="Robo Heads" />
       <Divider />
       <div className="monsters-page">
         {data.map((user) => {
@@ -140,7 +137,7 @@ const RoboHeads = () => {
                   >
                     {`${user.first_name}  ${user.last_name}`}
                   </Text>
-                  <Text>{user.gender}</Text>
+                  <Text>{user.phone.slice(0, 1)}</Text>
                 </Card>
               </Row>
             </div>

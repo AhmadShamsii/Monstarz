@@ -1,20 +1,17 @@
 export interface User {
   id: number;
   name: string;
-  first_name: string;
-  usermname: string;
   emial: string;
-  website: string;
-  quantity: number;
+  imageUrl: string;
+  registered: string;
+  city: string;
+  country: string;
+  login: any;
 }
 
 export interface UsersState {
   users: {
     usersData: User[];
     isLoading: boolean;
-    cart: User[];
-    favourites: User[];
-    iconColor: {};
-    admin: boolean;
   };
 }

@@ -1,10 +1,10 @@
 import { Layout, Menu } from "antd";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
 import {
   BarChartOutlined,
   DribbbleOutlined,
   DatabaseOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 
 const { Sider } = Layout;
@@ -12,7 +12,7 @@ const Sidebar = () => {
   const location = useLocation();
 
   const handleClick = (e) => {
-    // No need to do anything here, the default behavior will be handled by Ant Design
+    //
   };
   return (
     <Layout>
@@ -51,10 +51,17 @@ const Sidebar = () => {
           </Menu.Item>
           <Menu.Item
             style={{ backgroundColor: "white" }}
+            key="/analytics/customers"
+            icon={<UserOutlined />}
+          >
+            <Link to="/analytics/customers">Customers</Link>
+          </Menu.Item>
+          <Menu.Item
+            style={{ backgroundColor: "white" }}
             key="/analytics/category"
             icon={<DatabaseOutlined />}
           >
-            <Link to="/analytics/category">Category</Link>
+            <Link to="/analytics/orders">Orders</Link>
           </Menu.Item>
         </Menu>
       </Sider>

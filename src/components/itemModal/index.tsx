@@ -6,17 +6,17 @@ import {
   PhoneTwoTone,
   HeartFilled,
 } from "@ant-design/icons";
-import { usersSelector } from "../../app/users/selector";
+import { productsSelector } from "../../app/products/selector";
 import {
   addToCart,
   addToFavourites,
   removeFromFavourites,
   setFavColor,
-} from "../../app/users/slice";
+} from "../../app/products/slice";
 // import { nftsSelector } from "../../app/nft/selector";
 const Text = Typography;
 const ItemModal = ({ item, isModalOpen, setIsModalOpen }) => {
-  const { usersData, iconColor, favourites } = useSelector(usersSelector);
+  const { productsData, iconColor, favourites } = useSelector(productsSelector);
 
   const handleFavourite = (index) => {
     const favouriteExists = favourites.includes(index);
@@ -37,16 +37,16 @@ const ItemModal = ({ item, isModalOpen, setIsModalOpen }) => {
 
   if (item.id <= 10) {
     set = 2;
-    data = usersData;
+    data = productsData;
   } else if (item.id > 10 && item.id <= 25) {
     set = 1;
-    data = usersData.slice(0, 15);
+    data = productsData.slice(0, 15);
   } else if (item.id > 25 && item.id <= 32) {
     set = 5;
-    data = usersData.slice(15, 22);
+    data = productsData.slice(15, 22);
   } else if (item.id > 32 && item.id <= 40) {
     set = 3;
-    data = usersData.slice(22, 30);
+    data = productsData.slice(22, 30);
   }
   const index = item;
 

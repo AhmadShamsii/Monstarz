@@ -1,36 +1,21 @@
-import { Typography, PageHeader, Divider } from "antd";
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import { Divider } from "antd";
 import { Link } from "react-router-dom";
-import Foooter from "../../components/footer/footer";
-const Text = Typography;
+import Foooter from "../../components/footer";
+import {
+  StyledArrowLeftOutlined,
+  StyledPageHeader,
+  StyledText1,
+  StyledText2,
+} from "./styles";
 const About = () => (
   <div style={{ marginTop: "110px" }}>
-  <Link to="/">
-      <ArrowLeftOutlined
-        style={{
-          fontSize: "16px",
-          position: "absolute",
-          top: "149px",
-          left: "10%",
-          color: "black",
-        }}
-      />
+    <Link to="/">
+      <StyledArrowLeftOutlined />
     </Link>
-    <PageHeader  className="font-family-tertiary"
-      title="About"
-      style={{ marginTop: "113px", marginLeft: "10.5%" }}
-    />
+    <StyledPageHeader title="About" />
     <Divider />
 
-    <Text
-      style={{
-        width: "50%",
-        textAlign: "center",
-        position: "absolute",
-        left: "50%",
-        transform: "translateX(-50%)",
-      }}
-    >
+    <StyledText1>
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint, minima
       nulla. Dignissimos quo quisquam corrupti ratione nam illo deserunt
       asperiores libero consectetur quos quam eaque, excepturi iure. Inventore,
@@ -44,21 +29,14 @@ const About = () => (
       adipisicing elit. Repudiandae ipsa vel earum quo praesentium quis suscipit
       saepe autem, ex pariatur odit, aspernatur animi exercitationem, placeat
       incidunt obcaecati quam distinctio laboriosam.
-    </Text>
-    <Text
-      style={{
-        position: "absolute",
-        bottom: "30%",
-        left: "50%",
-        transform: "translate(-50%)",
-        fontWeight: "bold",
-      }}
-    >
-      Designed and Developed by{" "}
+    </StyledText1>
+    <StyledText2>
+      Designed and Developed by{"   "}
       <a target="blank" href="https://github.com/AhmadShamsii">
-        Ahmad Shamsi{" "}
+        Ahmad Shamsi
       </a>
-    </Text>
+    </StyledText2>
     <Foooter margintop="480px" />
-    </div>);
+  </div>
+);
 export default About;
