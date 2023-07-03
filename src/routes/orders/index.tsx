@@ -1,10 +1,11 @@
 import Sidebar from "../../components/sidebar";
-import { PageHeader, Card, Table, Tag, Button } from "antd";
-import { CheckCircleOutlined } from "@ant-design/icons";
+import { PageHeader, Card, Table, Tag, Typography, Tooltip } from "antd";
+import { CheckCircleOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router";
 
 import { useSelector } from "react-redux";
 import { productsSelector } from "../../app/products/selector";
+const Text = Typography;
 
 const Orders = () => {
   const navigate = useNavigate();
@@ -40,10 +41,25 @@ const Orders = () => {
 
   const columns = [
     {
-      title: "Order ID",
+      title: (
+        <Text>
+          Order ID
+          <Tooltip title="Click on the order id to see that order details">
+            <InfoCircleOutlined style={{ marginLeft: "10px" }} />
+          </Tooltip>
+        </Text>
+      ),
       dataIndex: `orderId`,
       key: "orderId",
       width: "20%",
+      onCell: () => {
+        return {
+          style: { cursor: "pointer" },
+        };
+      },
+      render: (text, record) => (
+        <Text onClick={() => handleRowClick(record)}>{text}</Text>
+      ),
     },
     {
       title: "Date",
@@ -71,7 +87,6 @@ const Orders = () => {
     },
   ];
 
-  console.log(filteredArray);
   return (
     <div>
       <Sidebar />
@@ -96,9 +111,6 @@ const Orders = () => {
       >
         <div>
           <Table
-            onRow={(record) => ({
-              onClick: () => handleRowClick(record),
-            })}
             style={{ paddingBottom: "50px" }}
             columns={columns}
             size="small"

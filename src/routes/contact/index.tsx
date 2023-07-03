@@ -27,10 +27,16 @@ const onFinish = (values: any) => {
 
 const Contact: React.FC = () => (
   <>
-    <Link to="/">
-      <StyledArrowLeftOutlined />
-    </Link>
-    <StyledPageHeader title="Contact" />
+    <StyledPageHeader
+      title={
+        <>
+          <Link to="/">
+            <StyledArrowLeftOutlined />
+          </Link>{" "}
+          Contact
+        </>
+      }
+    />
     <Divider />
     <StyledText>Get in Touch!</StyledText>
     <StyledForm

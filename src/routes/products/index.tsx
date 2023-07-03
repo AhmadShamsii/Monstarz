@@ -78,7 +78,7 @@ const Products = () => {
       render: (_: any, record: any) => {
         return (
           <div style={{ display: "flex" }}>
-            <DeleteUser data={fetchedData} index={record} />
+            <DeleteUser item={"Product"} data={fetchedData} index={record} />
             <EditTwoTone
               className="edituser-icon"
               onClick={() => handleEdit(record)}
@@ -152,7 +152,7 @@ const Products = () => {
               type="search"
               style={{ width: "350px", height: "30px", borderRadius: "5px" }}
               prefix={<SearchOutlined />}
-              placeholder=" Search Products"
+              placeholder="Search by name"
               onChange={onSearchChange}
             />
             <Button

@@ -67,6 +67,11 @@ export const StyledButton = styled(Button)`
   margin-left: 10%;
   color: #f6f2f8;
   background-color: #0d3b66;
+
+  &:hover {
+    background-color: #123456;
+    color: #ffffff;
+  }
 `;
 export const StyledText = styled(Text)`
   margin-left: 10%;
@@ -96,6 +101,11 @@ export const StyledButton1 = styled(Button)`
   background-color: #0d3b66;
   color: #f6f2f8;
   margin-top: 31px;
+
+  &:hover {
+    background-color: #123456;
+    color: #ffffff;
+  }
 `;
 export const StyledDivider = styled(Divider)`
   font-family: "Bigelow Rules", cursive;
@@ -149,9 +159,18 @@ export const StyledAddToCart = styled(Button)`
   background-color: #0d3b66;
   color: #f6f2f8;
   border-radius: 10px;
+  height: auto;
   position: absolute;
   bottom: 5%;
   right: 22%;
+  &:hover {
+    background-color: #123456;
+    color: #ffffff;
+  }
+  &:focus {
+    background-color: #123456;
+    color: #ffffff;
+  }
 `;
 export const StyledCardTitle = styled(Text)`
   color: black;

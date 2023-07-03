@@ -1,124 +1,71 @@
-import { Card, PageHeader, Divider, Typography } from "antd";
-import { ArrowLeftOutlined } from "@ant-design/icons";
-import { StyledPageHeader } from "../about/styles";
+import { Divider, Space } from "antd";
+import { StyledArrowLeftOutlined, StyledPageHeader } from "../about/styles";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { productsSelector } from "../../app/products/selector";
 import Foooter from "../../components/footer";
-const { Text } = Typography;
+import { StyledSpace, StyledCard, StyledText } from "./styles";
 
 const Shop = () => {
-  const dispatch = useDispatch();
-  const { productsData } = useSelector(productsSelector);
-  const data = productsData;
-
   return (
     <div style={{ marginTop: "110px" }}>
-      <Link to="/">
-        <ArrowLeftOutlined
-          style={{
-            fontSize: "16px",
-            position: "absolute",
-            top: "149px",
-            left: "10%",
-            color: "black",
-          }}
-        />
-      </Link>
-      <StyledPageHeader title="Categories" />
+      <StyledPageHeader
+        title={
+          <>
+            <Link to="/">
+              <StyledArrowLeftOutlined />
+            </Link>{" "}
+            Categories
+          </>
+        }
+      />
       <Divider />
-      <div className="cardlist-page">
+      <StyledSpace>
         <Link to="monsters">
-          <Card
+          <StyledCard
             className="font-family-primary"
             hoverable
-            style={{
-              width: "75%",
-              margin: "0",
-              backgroundColor: "white",
-              borderRadius: "5px",
-              textAlign: "center",
-            }}
             cover={
               <img alt="example" src={`https://robohash.org/1?set=set2`} />
             }
           >
-            <Text
-              style={{ fontSize: "42px", color: "black", fontWeight: "600" }}
-            >
-              Monsters
-            </Text>
-          </Card>
+            <StyledText>Monsters</StyledText>
+          </StyledCard>
         </Link>
         <Link to="robots">
-          <Card
+          <StyledCard
             className="font-family-primary"
             hoverable
-            style={{
-              width: "75%",
-              margin: "0",
-              backgroundColor: "white",
-              borderRadius: "5px",
-              textAlign: "center",
-            }}
             cover={
               <img alt="example" src={`https://robohash.org/3?set=set1`} />
             }
           >
-            <Text
-              style={{ fontSize: "42px", color: "black", fontWeight: "600" }}
-            >
-              Robots
-            </Text>
-          </Card>{" "}
+            <StyledText>Robots</StyledText>
+          </StyledCard>
         </Link>
 
         <Link to="avatars">
-          <Card
+          <StyledCard
             className="font-family-primary"
             hoverable
-            style={{
-              width: "75%",
-              margin: "0",
-              backgroundColor: "white",
-              borderRadius: "5px",
-              textAlign: "center",
-            }}
             cover={
               <img alt="example" src={`https://robohash.org/2?set=set5`} />
             }
           >
-            <Text
-              style={{ fontSize: "42px", color: "black", fontWeight: "600" }}
-            >
-              Avatars
-            </Text>
-          </Card>{" "}
+            <StyledText>Avatars</StyledText>
+          </StyledCard>
         </Link>
 
         <Link to="roboHeads">
-          <Card
+          <StyledCard
             className="font-family-primary"
             hoverable
-            style={{
-              width: "75%",
-              margin: "0",
-              backgroundColor: "white",
-              borderRadius: "5px",
-              textAlign: "center",
-            }}
             cover={
               <img alt="example" src={`https://robohash.org/3?set=set3`} />
             }
           >
-            <Text
-              style={{ fontSize: "42px", color: "black", fontWeight: "600" }}
-            >
-              Robo Heads
-            </Text>
-          </Card>
+            <StyledText>Robo Heads</StyledText>
+          </StyledCard>
         </Link>
-      </div>
+      </StyledSpace>
       <Foooter margintop="150px" />
     </div>
   );

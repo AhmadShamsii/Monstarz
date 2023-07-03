@@ -9,10 +9,16 @@ import {
 } from "./styles";
 const About = () => (
   <div style={{ marginTop: "110px" }}>
-    <Link to="/">
-      <StyledArrowLeftOutlined />
-    </Link>
-    <StyledPageHeader title="About" />
+    <StyledPageHeader
+      title={
+        <>
+          <Link to="/">
+            <StyledArrowLeftOutlined />
+          </Link>{" "}
+          About
+        </>
+      }
+    />
     <Divider />
 
     <StyledText1>

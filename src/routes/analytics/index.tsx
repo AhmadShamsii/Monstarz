@@ -6,12 +6,14 @@ import {
   Statistic,
   Tag,
   Table,
+  Tooltip,
 } from "antd";
 import {
   EllipsisOutlined,
   ArrowUpOutlined,
   ArrowDownOutlined,
   CheckCircleOutlined,
+  InfoCircleOutlined,
 } from "@ant-design/icons";
 import Sidebar from "../../components/sidebar";
 import BarChart from "../../components/barChart";
@@ -35,34 +37,54 @@ const Analytics = () => {
     );
   });
 
-  const data = filteredArray
-    .map((nestedArray, index) => ({
-      order: nestedArray,
-      date: nestedArray[0].date,
-      time: nestedArray[0].time,
-      price: `$ ${
-        nestedArray.reduce((total, item) => total + item.quantity, 0) * 100
-      }`,
-      status: (
-        <Tag icon={<CheckCircleOutlined />} color="success">
-          Paid
-        </Tag>
-      ),
-      orderId: `${index + 1}`,
-    }))
-    .reverse()
-    .slice(0, 3);
+  const orders = filteredArray.map((nestedArray, index) => ({
+    order: nestedArray,
+    date: nestedArray[0].date,
+    time: nestedArray[0].time,
+    price: `$ ${
+      nestedArray.reduce((total, item) => total + item.quantity, 0) * 100
+    }`,
+    status: (
+      <Tag icon={<CheckCircleOutlined />} color="success">
+        Paid
+      </Tag>
+    ),
+    orderId: `${index + 1}`,
+  }));
+
+  const data = orders.reverse().slice(0, 3);
 
   const handleRowClick = (record) => {
     navigate(`orders/${record.orderId}`);
   };
 
+  const salesTotal = orders
+    .map((item) => parseInt(item.price.replace("$", "").trim()))
+    .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+  const averageOrderValue = salesTotal / filteredArray.length;
+
   const columns = [
     {
-      title: "Order ID",
+      title: (
+        <Text>
+          Order ID
+          <Tooltip title="Click on the order id to see that order details">
+            <InfoCircleOutlined style={{ marginLeft: "10px" }} />
+          </Tooltip>
+        </Text>
+      ),
+      onCell: () => {
+        return {
+          style: { cursor: "pointer" },
+        };
+      },
       dataIndex: `orderId`,
       key: "orderId",
       width: "20%",
+      render: (text, record) => (
+        <Text onClick={() => handleRowClick(record)}>{text}</Text>
+      ),
     },
     {
       title: "Date",
@@ -128,7 +150,7 @@ const Analytics = () => {
             }}
           >
             <Title style={{ fontSize: "22px", fontWeight: "bold" }}>
-              $3799
+              $ {salesTotal}{" "}
             </Title>
             <span>
               <Statistic
@@ -170,7 +192,7 @@ const Analytics = () => {
             }}
           >
             <Title style={{ fontSize: "22px", fontWeight: "bold" }}>
-              $272.98
+              $ {averageOrderValue ? averageOrderValue?.toFixed(2) : 0}
             </Title>
             <span>
               <Statistic
@@ -211,7 +233,7 @@ const Analytics = () => {
             }}
           >
             <Title style={{ fontSize: "22px", fontWeight: "bold" }}>
-              $3799
+              {filteredArray.length}
             </Title>
             <span>
               <Statistic
@@ -252,9 +274,6 @@ const Analytics = () => {
           Recent Orders
         </Text>
         <Table
-          onRow={(record) => ({
-            onClick: () => handleRowClick(record),
-          })}
           style={{ paddingBottom: "50px" }}
           columns={columns}
           size="small"

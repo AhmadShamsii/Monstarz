@@ -5,14 +5,12 @@ const Text = Typography;
 
 export const StyledArrowLeftOutlined = styled(ArrowLeftOutlined)`
   font-size: 16px;
-  position: absolute;
-  top: 149px;
-  left: 10%;
+  margin-right: 10px;
   color: black;
 `;
 export const StyledPageHeader = styled(PageHeader)`
   margin-top: 113px;
-  margin-left: 10.5%;
+  margin-left: 8.75%;
   font-family: "Henny Penny", cursive;
   font-weight: 100;
 `;

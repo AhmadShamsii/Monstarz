@@ -22,7 +22,7 @@ import {
   decrementQuantity,
   switchUser,
 } from "../../app/products/slice";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 const { Header } = Layout;
 
@@ -30,8 +30,6 @@ const Nav = () => {
   const { cart, favourites, iconColor, admin } = useSelector(productsSelector);
 
   const [isCartDropdownOpen, setIsCartDropdownOpen] = useState(false);
-  const [isFavDropdownOpen, setIsFavDropdownOpen] = useState(false);
-  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const dispatch = useDispatch();
 
   const { Title, Text } = Typography;
@@ -124,7 +122,11 @@ const Nav = () => {
       }}
     >
       <div className="logo" />
-      <Menu className="header-items" defaultSelectedKeys={["1"]}>
+      <Menu
+        style={{ position: "relative" }}
+        className="header-items"
+        defaultSelectedKeys={["1"]}
+      >
         <div>
           <Link to="/">
             <span
@@ -191,12 +193,10 @@ const Nav = () => {
             */}
             <Dropdown
               trigger={["click"]}
-              visible={isUserDropdownOpen}
               placement="bottom"
               className="dropdown1"
               overlay={
                 <Menu
-                  onClick={() => setIsUserDropdownOpen(true)}
                   style={{
                     borderRadius: "5px",
                     backgroundColor: "#f8f9fa",
@@ -227,7 +227,6 @@ const Nav = () => {
                           color: "white",
                         }}
                         onClick={() => {
-                          setIsUserDropdownOpen(false);
                           dispatch(switchUser());
                         }}
                       >
@@ -245,7 +244,6 @@ const Nav = () => {
                         color: "white",
                       }}
                       onClick={() => {
-                        setIsUserDropdownOpen(false);
                         dispatch(switchUser());
                       }}
                     >
@@ -265,9 +263,6 @@ const Nav = () => {
                 }}
                 onClick={(e) => {
                   e.preventDefault();
-                  setIsCartDropdownOpen(false);
-                  setIsFavDropdownOpen(false);
-                  setIsUserDropdownOpen(!isUserDropdownOpen);
                 }}
               />
             </Dropdown>
@@ -280,10 +275,8 @@ const Nav = () => {
             <Dropdown
               className="dropdown2"
               placement="bottom"
-              visible={isFavDropdownOpen}
               overlay={
                 <Menu
-                  onClick={() => setIsFavDropdownOpen(true)}
                   style={{
                     borderRadius: "5px",
                     backgroundColor: "#f8f9fa",
@@ -332,7 +325,7 @@ const Nav = () => {
                   <Divider style={{ margin: "6px 0" }}></Divider>
                 </Menu>
               }
-              trigger={favs.length > 0 ? ["click"] : ["contextMenu"]}
+              trigger={["click"]}
             >
               <Badge
                 style={{
@@ -351,9 +344,6 @@ const Nav = () => {
                   }}
                   onClick={(e) => {
                     e.preventDefault();
-                    setIsCartDropdownOpen(false);
-                    setIsUserDropdownOpen(false);
-                    setIsFavDropdownOpen(!isFavDropdownOpen);
                   }}
                 />
               </Badge>
@@ -478,8 +468,6 @@ const Nav = () => {
                   }}
                   onClick={(e) => {
                     e.preventDefault();
-                    setIsFavDropdownOpen(false);
-                    setIsUserDropdownOpen(false);
                     setIsCartDropdownOpen(!isCartDropdownOpen);
                   }}
                 />

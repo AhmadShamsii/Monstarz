@@ -1,5 +1,4 @@
 import { Card, PageHeader, Row, Divider, Button, Typography } from "antd";
-import { StyledPageHeader } from "../about/styles";
 
 import {
   HeartOutlined,
@@ -21,6 +20,16 @@ import {
 } from "../../app/products/slice";
 import ItemModal from "../../components/itemModal";
 import Foooter from "../../components/footer";
+
+import { StyledArrowLeftOutlined, StyledPageHeader } from "../about/styles";
+import {
+  StyledHeartFilled,
+  StyledAddToCart,
+  StyledCardTitle,
+} from "../../components/home/styles";
+
+import { StyledCard } from "../monsters/styles";
+
 const { Meta } = Card;
 const Text = Typography;
 
@@ -53,18 +62,16 @@ const RoboHeads = () => {
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
       />
-      <Link to="/shop">
-        <ArrowLeftOutlined
-          style={{
-            fontSize: "16px",
-            position: "absolute",
-            top: "149px",
-            left: "10%",
-            color: "black",
-          }}
-        />
-      </Link>
-      <StyledPageHeader title="Robo Heads" />
+      <StyledPageHeader
+        title={
+          <>
+            <Link to="/shop">
+              <StyledArrowLeftOutlined />
+            </Link>
+            Robo Heads
+          </>
+        }
+      />
       <Divider />
       <div className="monsters-page">
         {data.map((user) => {
@@ -72,21 +79,12 @@ const RoboHeads = () => {
           return (
             <div>
               <Row gutter={50}>
-                <Card
+                <StyledCard
                   onClick={() => {
                     showModal(user);
                   }}
                   key={user.id}
                   hoverable
-                  style={{
-                    width: "75%",
-                    marginLeft: "35px",
-                    marginBottom: "20px",
-                    backgroundColor: "white",
-                    borderRadius: "5px",
-                    textAlign: "center",
-                    fontSize: "16px",
-                  }}
                   cover={
                     <img
                       alt="example"
@@ -94,39 +92,26 @@ const RoboHeads = () => {
                     />
                   }
                 >
-                  <HeartFilled
+                  <StyledHeartFilled
                     style={{
-                      color: iconColor[user.id] || "#CDE4F9",
-                      fontSize: "20px",
-                      position: "absolute",
-                      top: "5%",
-                      right: "10%",
+                      color: iconColor[index.id] || "#CDE4F9",
                     }}
                     onClick={(e) => {
                       e.stopPropagation();
                       dispatch(addToFavourites({ index, data }));
-                      dispatch(setFavColor({ id: user.id }));
-                      handleFavourite(user);
+                      dispatch(setFavColor({ id: index.id }));
+                      handleFavourite(index);
                     }}
                   />
-                  <Button
-                    className="add-icon"
+                  <StyledAddToCart
                     icon={<PlusCircleOutlined />}
-                    style={{
-                      backgroundColor: "#0d3b66",
-                      color: "#F6F2F8",
-                      borderRadius: "10px",
-                      position: "absolute",
-                      bottom: "5%",
-                      right: "22%",
-                    }}
                     onClick={(e) => {
                       e.stopPropagation();
                       dispatch(addToCart(user));
                     }}
                   >
                     Add to Cart
-                  </Button>
+                  </StyledAddToCart>
                   <Text
                     style={{
                       color: "black",
@@ -138,7 +123,7 @@ const RoboHeads = () => {
                     {`${user.first_name}  ${user.last_name}`}
                   </Text>
                   <Text>{user.phone.slice(0, 1)}</Text>
-                </Card>
+                </StyledCard>
               </Row>
             </div>
           );

@@ -1,4 +1,4 @@
-import { Button, Modal, Form, Input, Space, Select } from "antd";
+import { Button, Modal, Form, Input, Space, Select, Divider } from "antd";
 import { useDispatch } from "react-redux";
 import { editProduct, addProduct } from "../../app/products/slice";
 
@@ -106,17 +106,24 @@ const AddAndEdit = ({
         title={operation === "add" ? "Add Product" : "Edit Product"}
         open={isModalOpen}
         onCancel={handleCancel}
+        width={450}
       >
         <Form
           form={form}
           {...layout}
-          style={{ maxWidth: 600 }}
           validateMessages={validateMessages}
+          layout="vertical"
         >
-          <Form.Item name={["name"]} label="Name" rules={[{ required: true }]}>
+          <Form.Item
+            style={{ width: "600px" }}
+            name={["name"]}
+            label="Name"
+            rules={[{ required: true }]}
+          >
             <Input />
           </Form.Item>
           <Form.Item
+            style={{ width: "600px" }}
             name={["email"]}
             label="Email"
             rules={[{ type: "email", required: true }]}
@@ -124,6 +131,7 @@ const AddAndEdit = ({
             <Input />
           </Form.Item>
           <Form.Item
+            style={{ width: "600px" }}
             name={["phone"]}
             label="Phone"
             rules={[{ required: true }]}
@@ -132,13 +140,13 @@ const AddAndEdit = ({
           </Form.Item>
           {operation === "add" ? (
             <Form.Item
+              style={{ width: "200px" }}
               name={["Category"]}
               rules={[
                 {
                   required: true,
                 },
               ]}
-              style={{ marginLeft: "120px" }}
             >
               <Select
                 showSearch
@@ -167,8 +175,15 @@ const AddAndEdit = ({
           ) : (
             ""
           )}
+          <Divider />
 
-          <Form.Item wrapperCol={{ offset: 14 }}>
+          <Form.Item
+            style={{
+              display: "flex",
+              justifyContent: "end",
+              marginRight: "5px",
+            }}
+          >
             <Space>
               <Button onClick={handleCancel}>Cancel</Button>
               <Button

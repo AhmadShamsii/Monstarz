@@ -1,4 +1,13 @@
-import { Button, Modal, Form, Input, Space, Select, Typography } from "antd";
+import {
+  Button,
+  Modal,
+  Form,
+  Input,
+  Space,
+  Select,
+  Typography,
+  Divider,
+} from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
@@ -165,35 +174,29 @@ const AddAndEditCustomer = ({
         title={operation === "add" ? "Add Customer" : "Edit Customer"}
         open={isModalOpen}
         onCancel={handleCancel}
+        style={{
+          top: 70,
+        }}
       >
         <Form
           form={form}
           layout="vertical"
           {...layout}
           style={{
-            width: "120%",
-            marginLeft: "10%",
+            marginLeft: "1%",
           }}
           validateMessages={validateMessages}
         >
           {operation === "add" ? (
-            <Form.Item
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-              name="Name"
-              label="Name"
-            >
-              <Input disabled value={name} />
+            <Form.Item name="Name" label="Name">
+              <Input style={{ width: "460px" }} disabled value={name} />
               <>
                 <Button onClick={showNameModal} type="link">
                   <Text
                     style={{
                       position: "relative",
                       top: "-63px",
-                      left: "230px",
+                      left: "310px",
                       color: "blue",
                     }}
                   >
@@ -207,7 +210,7 @@ const AddAndEditCustomer = ({
                   onOk={handleNameModalOk}
                   onCancel={handleNameModalCancel}
                   style={{
-                    top: 170,
+                    top: 180,
                   }}
                   width={450}
                 >
@@ -290,7 +293,15 @@ const AddAndEditCustomer = ({
               </>
             </Form.Item>
           ) : (
-            <Form.Item name={["FullName"]} label="Full Name">
+            <Form.Item
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+              name={["FullName"]}
+              label="Full Name"
+            >
               <Input />
             </Form.Item>
           )}
@@ -314,24 +325,18 @@ const AddAndEditCustomer = ({
               },
             ]}
           >
-            <Input />
+            <Input style={{ width: "460px" }} />
           </Form.Item>
-          <Space>
-            <Form.Item
-              style={{ width: "145%" }}
-              name="City"
-              label="City"
-              rules={[{ required: true }]}
-            >
-              <Input />
+          <Space style={{ width: " 460px" }}>
+            <Form.Item name="City" label="City" rules={[{ required: true }]}>
+              <Input style={{ width: "210px" }} />
             </Form.Item>
             <Form.Item
-              style={{ width: "145%" }}
               name="Country"
               label="Country"
               rules={[{ required: true }]}
             >
-              <Input />
+              <Input style={{ width: "240px" }} />
             </Form.Item>
           </Space>
           {operation === "add" ? (
@@ -343,8 +348,13 @@ const AddAndEditCustomer = ({
               record={record}
             />
           )}
-
-          <Form.Item wrapperCol={{ offset: 14 }}>
+          <Form.Item
+            style={{
+              display: "flex",
+              justifyContent: "end",
+              marginRight: "50px",
+            }}
+          >
             <Space style={{ position: "absolute", left: "-110px" }}>
               <Button onClick={handleCancel}>Cancel</Button>
               <Button

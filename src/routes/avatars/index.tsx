@@ -1,5 +1,4 @@
 import { Card, PageHeader, Row, Divider, Button, Typography } from "antd";
-import { StyledPageHeader } from "../about/styles";
 import {
   HeartOutlined,
   PlusCircleOutlined,
@@ -8,7 +7,6 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { nftsSelector } from "../../app/nft/selector";
 import { productsSelector } from "../../app/products/selector";
 
 import {
@@ -20,6 +18,16 @@ import {
 import ItemModal from "../../components/itemModal";
 import { useState } from "react";
 import Foooter from "../../components/footer";
+
+import { StyledArrowLeftOutlined, StyledPageHeader } from "../about/styles";
+import {
+  StyledHeartFilled,
+  StyledAddToCart,
+  StyledCardTitle,
+} from "../../components/home/styles";
+
+import { StyledCard } from "../monsters/styles";
+
 const { Meta } = Card;
 const Text = Typography;
 
@@ -51,19 +59,16 @@ const Avatars = () => {
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
       />
-      <Link to="/shop">
-        <ArrowLeftOutlined
-          style={{
-            fontSize: "16px",
-            position: "absolute",
-            top: "149px",
-            left: "10%",
-            color: "black",
-          }}
-        />
-      </Link>
-      <StyledPageHeader title="Avatars" />
-      {/* <CartDropDown /> */}
+      <StyledPageHeader
+        title={
+          <>
+            <Link to="/shop">
+              <StyledArrowLeftOutlined />
+            </Link>
+            Avatars
+          </>
+        }
+      />
       <Divider />
       <div className="monsters-page">
         {data.map((user) => {
@@ -71,21 +76,12 @@ const Avatars = () => {
           return (
             <div>
               <Row gutter={50}>
-                <Card
+                <StyledCard
                   onClick={() => {
                     showModal(user);
                   }}
                   key={user.id}
                   hoverable
-                  style={{
-                    width: "75%",
-                    marginLeft: "35px",
-                    marginBottom: "20px",
-                    backgroundColor: "white",
-                    borderRadius: "5px",
-                    textAlign: "center",
-                    fontSize: "16px",
-                  }}
                   cover={
                     <img
                       alt="example"
@@ -93,13 +89,9 @@ const Avatars = () => {
                     />
                   }
                 >
-                  <HeartFilled
+                  <StyledHeartFilled
                     style={{
                       color: iconColor[index.id] || "#CDE4F9",
-                      fontSize: "20px",
-                      position: "absolute",
-                      top: "5%",
-                      right: "10%",
                     }}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -108,24 +100,15 @@ const Avatars = () => {
                       handleFavourite(index);
                     }}
                   />
-                  <Button
-                    className="add-icon"
+                  <StyledAddToCart
                     icon={<PlusCircleOutlined />}
-                    style={{
-                      backgroundColor: "#0d3b66",
-                      color: "#F6F2F8",
-                      borderRadius: "10px",
-                      position: "absolute",
-                      bottom: "5%",
-                      right: "22%",
-                    }}
                     onClick={(e) => {
                       e.stopPropagation();
                       dispatch(addToCart(user));
                     }}
                   >
                     Add to Cart
-                  </Button>
+                  </StyledAddToCart>
                   <Text
                     style={{
                       color: "black",
@@ -137,7 +120,7 @@ const Avatars = () => {
                     {`${user.first_name}  ${user.last_name}`}
                   </Text>
                   <Text>{user.phone.slice(0, 1)}</Text>
-                </Card>
+                </StyledCard>
               </Row>
             </div>
           );

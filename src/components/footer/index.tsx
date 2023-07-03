@@ -5,6 +5,9 @@ import {
   PhoneOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+
+import { StyledSpaceFooter } from "./styles";
+
 const Text = Typography;
 const Title = Typography;
 
@@ -49,13 +52,9 @@ const Foooter = ({ margintop }) => {
     openMessage(values);
   };
   return (
-    <Space
+    <StyledSpaceFooter
       style={{
-        backgroundColor: "#0d3b66",
-        width: "100%",
-        padding: "5% 11% 100px 11%",
         marginTop: `${margintop}`,
-        fontSize: "15px",
       }}
     >
       <div
@@ -180,7 +179,7 @@ const Foooter = ({ margintop }) => {
           </Form>
         </Space.Compact>
       </div>
-    </Space>
+    </StyledSpaceFooter>
   );
 };
 export default Foooter;

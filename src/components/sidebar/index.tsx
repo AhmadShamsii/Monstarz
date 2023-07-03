@@ -21,7 +21,7 @@ const Sidebar = () => {
         style={{
           height: "100vh",
           position: "fixed",
-          backgroundColor: "#f8f9fa",
+          backgroundColor: "white",
           paddingTop: "80px",
           fontSize: "20px",
         }}
@@ -29,35 +29,35 @@ const Sidebar = () => {
         <Menu
           style={{
             fontSize: "15.5px",
-            backgroundColor: "#f8f9fa",
+            backgroundColor: "white",
           }}
           mode="inline"
           selectedKeys={[location.pathname]}
           onClick={handleClick}
         >
           <Menu.Item
-            style={{ backgroundColor: "white" }}
+            style={{ backgroundColor: "#f8f9fa" }}
             key="/analytics"
             icon={<BarChartOutlined />}
           >
             <Link to="/analytics">Dashboard</Link>
           </Menu.Item>
           <Menu.Item
-            style={{ backgroundColor: "white" }}
+            style={{ backgroundColor: "#f8f9fa" }}
             key="/analytics/products"
             icon={<DribbbleOutlined />}
           >
             <Link to="/analytics/products">Products</Link>
           </Menu.Item>
           <Menu.Item
-            style={{ backgroundColor: "white" }}
+            style={{ backgroundColor: "#f8f9fa" }}
             key="/analytics/customers"
             icon={<UserOutlined />}
           >
             <Link to="/analytics/customers">Customers</Link>
           </Menu.Item>
           <Menu.Item
-            style={{ backgroundColor: "white" }}
+            style={{ backgroundColor: "#f8f9fa" }}
             key="/analytics/category"
             icon={<DatabaseOutlined />}
           >
