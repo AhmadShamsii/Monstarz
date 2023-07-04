@@ -75,7 +75,7 @@ const Foooter = ({ margintop }) => {
         </Space>
         <Space style={{ color: "#F6F2F8" }}>
           <PhoneOutlined />
-          <Text style={{ color: "#F6F2F8" }}>03145445663</Text>
+          <Text style={{ color: "#F6F2F8" }}>0314-5445663</Text>
         </Space>
       </div>
       <div

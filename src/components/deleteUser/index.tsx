@@ -3,6 +3,7 @@ import { Popconfirm, Space } from "antd";
 import { DeleteTwoTone } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../../app/users/slice";
+import { removeProduct } from "../../app/products/slice";
 
 const showDeleteConfirm = (index, data, item) => {
   const dispatch = useDispatch();

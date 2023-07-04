@@ -22,6 +22,8 @@ import { useNavigate } from "react-router";
 
 import { useSelector } from "react-redux";
 import { productsSelector } from "../../app/products/selector";
+import { Helmet } from "react-helmet-async";
+
 const Title = Typography;
 const Text = Typography;
 const Analytics = () => {
@@ -83,7 +85,9 @@ const Analytics = () => {
       key: "orderId",
       width: "20%",
       render: (text, record) => (
-        <Text onClick={() => handleRowClick(record)}>{text}</Text>
+        <Text style={{ color: "blue" }} onClick={() => handleRowClick(record)}>
+          {text}
+        </Text>
       ),
     },
     {
@@ -113,6 +117,9 @@ const Analytics = () => {
   ];
   return (
     <div>
+      <Helmet>
+        <title>Admin - Dashboard</title>
+      </Helmet>
       <Sidebar />
       <div>
         <PageHeader

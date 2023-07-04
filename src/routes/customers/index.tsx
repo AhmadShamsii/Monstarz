@@ -22,6 +22,7 @@ import { User } from "../../app/users/types";
 
 import { usersSelector } from "../../app/users/selector";
 import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet-async";
 
 const Text = Typography;
 const Title = Typography;
@@ -139,6 +140,9 @@ const Customers = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Admin - Customers</title>
+      </Helmet>
       <Sidebar />
       <div>
         <PageHeader

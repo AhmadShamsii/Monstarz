@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Foooter from "../../components/footer";
 import { StyledArrowLeftOutlined, StyledPageHeader } from "../about/styles";
 import { StyledText, StyledForm } from "./styles";
+import { Helmet } from "react-helmet-async";
 const Text = Typography;
 const layout = {
   labelCol: { span: 8 },
@@ -27,6 +28,9 @@ const onFinish = (values: any) => {
 
 const Contact: React.FC = () => (
   <>
+    <Helmet>
+      <title>Contact</title>
+    </Helmet>
     <StyledPageHeader
       title={
         <>

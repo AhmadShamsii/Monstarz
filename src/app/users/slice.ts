@@ -23,7 +23,6 @@ export const usersSlice = createSlice({
       state.users.isLoading = false;
     },
     addUser: (state, action) => {
-      console.log(action.payload);
       state.users.usersData = [action.payload, ...state.users.usersData];
     },
     editUser: (state, action) => {

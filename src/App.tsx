@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchProductsRequest } from "./app/products/slice";
 import { fetchUsersRequest } from "./app/users/slice";
+import { HelmetProvider } from "react-helmet-async";
 
 import Layout from "./components/layout";
 import About from "./routes/about";
@@ -28,26 +29,34 @@ const App = () => {
     dispatch(fetchUsersRequest());
   }, []);
 
+  const helmetContext = {};
+
+
   return (
-    <BrowserRouter>
-      <Layout />
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="shop" element={<Shop />} />
-        <Route path="shop/monsters" element={<Monsters />} />
-        <Route path="shop/robots" element={<Robots />} />
-        <Route path="shop/avatars" element={<Avatars />} />
-        <Route path="shop/roboHeads" element={<RoboHeads />} />
-        <Route path={"checkout"} element={<Checkout />} />
-        <Route path={"/analytics"} element={<Analytics />} />
-        <Route path={"/analytics/products"} element={<Products />} />
+    <HelmetProvider context={helmetContext}>
+      <BrowserRouter>
+        <Layout />
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="shop" element={<Shop />} />
+          <Route path="shop/monsters" element={<Monsters />} />
+          <Route path="shop/robots" element={<Robots />} />
+          <Route path="shop/avatars" element={<Avatars />} />
+          <Route path="shop/roboHeads" element={<RoboHeads />} />
+          <Route path={"checkout"} element={<Checkout />} />
+          <Route path={"/analytics"} element={<Analytics />} />
+          <Route path={"/analytics/products"} element={<Products />} />
           <Route path={"/analytics/customers"} element={<Customers />} />
-        <Route path={"/analytics/orders"} element={<Orders />} />
-        <Route path={"/analytics/orders/:orderId"} element={<OrderDetails />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path={"/analytics/orders"} element={<Orders />} />
+          <Route
+            path={"/analytics/orders/:orderId"}
+            element={<OrderDetails />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 };
 

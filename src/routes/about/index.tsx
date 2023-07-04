@@ -7,8 +7,13 @@ import {
   StyledText1,
   StyledText2,
 } from "./styles";
+import { Helmet } from "react-helmet-async";
+
 const About = () => (
   <div style={{ marginTop: "110px" }}>
+    <Helmet>
+        <title>About</title>
+      </Helmet>
     <StyledPageHeader
       title={
         <>

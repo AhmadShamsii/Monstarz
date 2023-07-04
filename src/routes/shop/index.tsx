@@ -3,10 +3,14 @@ import { StyledArrowLeftOutlined, StyledPageHeader } from "../about/styles";
 import { Link } from "react-router-dom";
 import Foooter from "../../components/footer";
 import { StyledSpace, StyledCard, StyledText } from "./styles";
+import { Helmet } from "react-helmet-async";
 
 const Shop = () => {
   return (
     <div style={{ marginTop: "110px" }}>
+      <Helmet>
+        <title>Shop</title>
+      </Helmet>
       <StyledPageHeader
         title={
           <>

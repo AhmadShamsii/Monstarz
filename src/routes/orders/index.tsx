@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 
 import { useSelector } from "react-redux";
 import { productsSelector } from "../../app/products/selector";
+import { Helmet } from "react-helmet-async";
 const Text = Typography;
 
 const Orders = () => {
@@ -58,7 +59,9 @@ const Orders = () => {
         };
       },
       render: (text, record) => (
-        <Text onClick={() => handleRowClick(record)}>{text}</Text>
+        <Text style={{ color: "blue" }} onClick={() => handleRowClick(record)}>
+          {text}
+        </Text>
       ),
     },
     {
@@ -89,6 +92,9 @@ const Orders = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Admin - Orders</title>
+      </Helmet>
       <Sidebar />
       <div>
         <PageHeader

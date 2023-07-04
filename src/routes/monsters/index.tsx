@@ -32,6 +32,7 @@ import {
   StyledCardTitle,
 } from "../../components/home/styles";
 import { StyledCard } from "./styles";
+import { Helmet } from "react-helmet-async";
 
 const Text = Typography;
 const Monsters = () => {
@@ -58,6 +59,9 @@ const Monsters = () => {
 
   return (
     <div style={{ marginTop: "110px" }}>
+      <Helmet>
+        <title>Monsters</title>
+      </Helmet>
       <ItemModal
         item={cardClicked}
         isModalOpen={isModalOpen}

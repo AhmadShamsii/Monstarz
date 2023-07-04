@@ -12,6 +12,7 @@ import { Product } from "../../app/products/types";
 
 import { productsSelector } from "../../app/products/selector";
 import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet-async";
 
 const Products = () => {
   const { productsData } = useSelector(productsSelector);
@@ -120,6 +121,9 @@ const Products = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Admin - Products</title>
+      </Helmet>
       <Sidebar />
       <div>
         <PageHeader

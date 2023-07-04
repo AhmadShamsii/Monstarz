@@ -46,6 +46,7 @@ import {
   addToCart,
 } from "../../app/products/slice";
 import ItemModal from "../itemModal";
+import { Helmet } from "react-helmet-async";
 
 const Text = Typography;
 
@@ -73,6 +74,9 @@ const Home = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Monstarz</title>
+      </Helmet>
       <StyledCarousel dotPosition="bottom" autoplay autoplaySpeed={3000}>
         <>
           <Space>
