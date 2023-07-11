@@ -14,11 +14,13 @@ import { useState, useEffect } from "react";
 import UploadImage from "../uploadImage.tsx";
 import EditImage from "../editImage";
 import { addUser, editUser } from "../../app/users/slice";
+
+import { StyledText, StyledFormButtons } from "./styles";
+
 const layout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 16 },
 };
-// `${record.name?.title} ${record.name?.first} ${record.name?.last}`
 const validateMessages = {
   required: "${name} is required!",
   types: {
@@ -192,16 +194,9 @@ const AddAndEditCustomer = ({
               <Input style={{ width: "460px" }} disabled value={name} />
               <>
                 <Button onClick={showNameModal} type="link">
-                  <Text
-                    style={{
-                      position: "relative",
-                      top: "-63px",
-                      left: "310px",
-                      color: "blue",
-                    }}
-                  >
+                  <StyledText>
                     <PlusCircleOutlined /> Click to Add Name
-                  </Text>
+                  </StyledText>
                 </Button>
                 <Modal
                   footer={null}
@@ -272,20 +267,14 @@ const AddAndEditCustomer = ({
                         style={{ width: "160px" }}
                       />
                     </Form.Item>
-                    <Form.Item
-                      style={{
-                        position: "relative",
-                        right: "160px",
-                        bottom: "-71px",
-                      }}
-                    >
+                    <StyledFormButtons>
                       <Space>
                         <Button onClick={handleNameModalCancel}>Cancel</Button>
                         <Button type="primary" htmlType="submit">
                           Submit
                         </Button>
                       </Space>
-                    </Form.Item>
+                    </StyledFormButtons>
                   </Form>
                   <Text style={{ color: "white" }}>.</Text>
                   <Text style={{ color: "white" }}>.</Text>
@@ -306,15 +295,6 @@ const AddAndEditCustomer = ({
             </Form.Item>
           )}
 
-          {/* 
-          
-          
-          
-          
-          
-          
-          
-          */}
           <Form.Item
             name="Email"
             label="Email"

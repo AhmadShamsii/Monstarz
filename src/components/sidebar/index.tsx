@@ -7,7 +7,8 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 
-const { Sider } = Layout;
+import { StyledSider, StyledMenu, StyledMenuItem } from "./styles";
+
 const Sidebar = () => {
   const location = useLocation();
 
@@ -16,55 +17,26 @@ const Sidebar = () => {
   };
   return (
     <Layout>
-      <Sider
-        width={240}
-        style={{
-          height: "100vh",
-          position: "fixed",
-          backgroundColor: "white",
-          paddingTop: "80px",
-          fontSize: "20px",
-        }}
-      >
-        <Menu
-          style={{
-            fontSize: "15.5px",
-            backgroundColor: "white",
-          }}
+      <StyledSider width={240}>
+        <StyledMenu
           mode="inline"
-          selectedKeys={[location.pathname]}
+          // selectedKeys={[location.pathname]}
           onClick={handleClick}
         >
-          <Menu.Item
-            style={{ backgroundColor: "#f8f9fa" }}
-            key="/analytics"
-            icon={<BarChartOutlined />}
-          >
+          <StyledMenuItem key="/analytics" icon={<BarChartOutlined />}>
             <Link to="/analytics">Dashboard</Link>
-          </Menu.Item>
-          <Menu.Item
-            style={{ backgroundColor: "#f8f9fa" }}
-            key="/analytics/products"
-            icon={<DribbbleOutlined />}
-          >
+          </StyledMenuItem>
+          <StyledMenuItem key="/analytics/products" icon={<DribbbleOutlined />}>
             <Link to="/analytics/products">Products</Link>
-          </Menu.Item>
-          <Menu.Item
-            style={{ backgroundColor: "#f8f9fa" }}
-            key="/analytics/customers"
-            icon={<UserOutlined />}
-          >
+          </StyledMenuItem>
+          <StyledMenuItem key="/analytics/customers" icon={<UserOutlined />}>
             <Link to="/analytics/customers">Customers</Link>
-          </Menu.Item>
-          <Menu.Item
-            style={{ backgroundColor: "#f8f9fa" }}
-            key="/analytics/category"
-            icon={<DatabaseOutlined />}
-          >
+          </StyledMenuItem>
+          <StyledMenuItem key="/analytics/orders" icon={<DatabaseOutlined />}>
             <Link to="/analytics/orders">Orders</Link>
-          </Menu.Item>
-        </Menu>
-      </Sider>
+          </StyledMenuItem>
+        </StyledMenu>
+      </StyledSider>
     </Layout>
   );
 };

@@ -1,4 +1,4 @@
-import { PageHeader, Card, Table, Typography, Tag, Avatar } from "antd";
+import {  Card, Table, Typography, Tag, Avatar } from "antd";
 import { CheckCircleOutlined } from "@ant-design/icons";
 const Text = Typography;
 import { useParams } from "react-router-dom";
@@ -6,6 +6,9 @@ import { useSelector } from "react-redux";
 import { productsSelector } from "../../app/products/selector";
 
 import Sidebar from "../../components/sidebar";
+
+import { StyledAdminPageHeader, StyledCard } from "../customers/styles";
+
 const OrderDetails = () => {
   const { totalOrders } = useSelector(productsSelector);
   const { orderId } = useParams();
@@ -141,47 +144,14 @@ const OrderDetails = () => {
   ];
 
   return (
-    <div>
+    <>
       <Sidebar />
-      <div>
-        <PageHeader
-          title={`Order #${orderId}`}
-          style={{ marginTop: "65px", marginLeft: "17%", fontWeight: "bold" }}
-        />
-      </div>
-      <Card
-        style={{
-          width: "80%",
-          marginLeft: "18.5%",
-          borderRadius: "10px",
-          marginTop: "20px",
-        }}
-      >
-        <Text
-          style={{ fontSize: "16px", fontWeight: "bold", marginBottom: "15px" }}
-        >
-          Order Information
-        </Text>
+      <StyledAdminPageHeader title={`Order #${orderId}`} />
+      <StyledCard title="Order Information">
         <Table pagination={false} columns={columns1} dataSource={uniqueData} />
-      </Card>
-      <div>
-        <Card
-          style={{
-            width: "80%",
-            marginLeft: "18.5%",
-            borderRadius: "10px",
-            marginTop: "20px",
-          }}
-        >
-          <Text
-            style={{
-              fontSize: "16px",
-              fontWeight: "bold",
-              marginBottom: "15px",
-            }}
-          >
-            Items
-          </Text>
+      </StyledCard>
+      <>
+        <StyledCard title="Items">
           <Table
             style={{ marginBottom: "50px" }}
             pagination={false}
@@ -189,42 +159,25 @@ const OrderDetails = () => {
             dataSource={order}
           />
           <Card
+            extra={
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  paddingRight: "135px",
+                }}
+              >
+                Total: $
+                {order.reduce((total, item) => total + item.quantity, 0) * 100}
+              </Text>
+            }
             style={{
               backgroundColor: "#FAFAFA",
-              display: "flex",
             }}
-          >
-            <div
-              style={{
-                display: "flex",
-                position: "absolute",
-                right: "15%",
-                top: "10px",
-              }}
-            >
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  fontSize: "18px",
-                  marginRight: "10px",
-                }}
-              >
-                Total:
-              </Text>
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  fontSize: "18px",
-                  marginBottom: "100px",
-                }}
-              >
-                ${order.reduce((total, item) => total + item.quantity, 0) * 100}
-              </Text>
-            </div>
-          </Card>
-        </Card>
-      </div>
-    </div>
+          />
+        </StyledCard>
+      </>
+    </>
   );
 };
 export default OrderDetails;

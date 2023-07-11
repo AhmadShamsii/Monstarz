@@ -1,4 +1,4 @@
-import { Modal, Avatar, Button, Typography } from "antd";
+import { Modal, Avatar, Space, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   PlusCircleOutlined,
@@ -13,7 +13,16 @@ import {
   removeFromFavourites,
   setFavColor,
 } from "../../app/products/slice";
-// import { nftsSelector } from "../../app/nft/selector";
+
+import {
+  StyledAvatar,
+  StyledName,
+  StyledEmail,
+  StyledPhone,
+  StyledModalHeart,
+  StyledModalAddCart,
+} from "./styles";
+
 const Text = Typography;
 const ItemModal = ({ item, isModalOpen, setIsModalOpen }) => {
   const { productsData, iconColor, favourites } = useSelector(productsSelector);
@@ -59,74 +68,56 @@ const ItemModal = ({ item, isModalOpen, setIsModalOpen }) => {
       onCancel={handleCancel}
     >
       <div style={{ display: "flex" }}>
-        <Avatar
-          style={{
-            width: "100%",
-            backgroundColor: "#dee2e6",
-            borderRadius: "10px",
-          }}
+        <StyledAvatar
+          style={{ width: "100%" }}
           shape="square"
           size={350}
           src={`https://robohash.org/${item.id}?set=set${set}`}
         />
-        <div style={{ width: "100%", marginLeft: "30px", fontWeight: "bold" }}>
-          <Text
-            className="font-family-secondary"
-            style={{ fontSize: "30px", color: "#023047", marginBottom: "20px" }}
-          >
+        <div
+          style={{
+            width: "100%",
+            marginLeft: "30px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <StyledName strong>
             {item.name || `${item.first_name}  ${item.last_name}`}
-          </Text>
-          <Text
-            style={{ fontSize: "16px", color: "#1890ff", fontWeight: "400" }}
-          >
+          </StyledName>
+          <StyledEmail>
             <MailTwoTone style={{ marginRight: "5px" }} /> {item.email}
-          </Text>
-          <Text style={{ fontSize: "16px", color: "red", fontWeight: "400" }}>
+          </StyledEmail>
+          <StyledPhone>
             <PhoneTwoTone style={{ marginRight: "7px" }} twoToneColor="red" />
             {item.phone}
-          </Text>
+          </StyledPhone>
           <Text style={{ marginTop: "15px", fontSize: "34px" }}>
-            <span style={{ color: "#38b000" }}>$</span>
-            <span style={{ fontWeight: "400" }}>100</span>
+            <Space style={{ color: "#38b000", fontWeight: "bold" }}>$</Space>
+            <Space style={{ fontWeight: "400" }}>100</Space>
           </Text>
-          <HeartFilled
-            style={{
-              color: iconColor[item.id] || "#CDE4F9",
-              fontSize: "40px",
-              position: "relative",
-              bottom: "-30px",
-              left: "1px",
-              fill: "black",
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-              dispatch(addToFavourites({ index, data }));
-              dispatch(setFavColor({ id: item.id }));
-              handleFavourite(item);
-            }}
-          />
-          <Button
-            className="add-icon"
-            icon={<PlusCircleOutlined />}
-            style={{
-              backgroundColor: "#0d3b66",
-              color: "#F6F2F8",
-              width: "160px",
-              fontSize: "20px",
-              height: "42px",
-              borderRadius: "10px",
-              position: "relative",
-              bottom: "-24px",
-              left: "32%",
-              transform: "translateX(-50%)",
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-              dispatch(addToCart(item));
-            }}
-          >
-            Add to Cart
-          </Button>
+          <Space style={{ display: "flex" }}>
+            <StyledModalHeart
+              style={{
+                color: iconColor[item.id] || "#CDE4F9",
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                dispatch(addToFavourites({ index, data }));
+                dispatch(setFavColor({ id: item.id }));
+                handleFavourite(item);
+              }}
+            />
+            <StyledModalAddCart
+              icon={<PlusCircleOutlined />}
+              onClick={(e) => {
+                e.stopPropagation();
+                dispatch(addToCart(item));
+              }}
+            >
+              Add to Cart
+            </StyledModalAddCart>
+          </Space>
         </div>
       </div>
     </Modal>

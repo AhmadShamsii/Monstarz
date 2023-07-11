@@ -2,6 +2,7 @@ import { Button, Modal, Form, Input, Space, Select, Divider } from "antd";
 import { useDispatch } from "react-redux";
 import { editProduct, addProduct } from "../../app/products/slice";
 
+import { StyledFormItem, StyledFormButtons } from "./styles";
 const layout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 16 },
@@ -114,30 +115,27 @@ const AddAndEdit = ({
           validateMessages={validateMessages}
           layout="vertical"
         >
-          <Form.Item
-            style={{ width: "600px" }}
+          <StyledFormItem
             name={["name"]}
             label="Name"
             rules={[{ required: true }]}
           >
             <Input />
-          </Form.Item>
-          <Form.Item
-            style={{ width: "600px" }}
+          </StyledFormItem>
+          <StyledFormItem
             name={["email"]}
             label="Email"
             rules={[{ type: "email", required: true }]}
           >
             <Input />
-          </Form.Item>
-          <Form.Item
-            style={{ width: "600px" }}
+          </StyledFormItem>
+          <StyledFormItem
             name={["phone"]}
             label="Phone"
             rules={[{ required: true }]}
           >
             <Input />
-          </Form.Item>
+          </StyledFormItem>
           {operation === "add" ? (
             <Form.Item
               style={{ width: "200px" }}
@@ -177,13 +175,7 @@ const AddAndEdit = ({
           )}
           <Divider />
 
-          <Form.Item
-            style={{
-              display: "flex",
-              justifyContent: "end",
-              marginRight: "5px",
-            }}
-          >
+          <StyledFormButtons>
             <Space>
               <Button onClick={handleCancel}>Cancel</Button>
               <Button
@@ -194,7 +186,7 @@ const AddAndEdit = ({
                 Submit
               </Button>
             </Space>
-          </Form.Item>
+          </StyledFormButtons>
         </Form>
       </Modal>
     </>

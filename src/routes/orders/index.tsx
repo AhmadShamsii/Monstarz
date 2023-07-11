@@ -1,12 +1,16 @@
 import Sidebar from "../../components/sidebar";
-import { PageHeader, Card, Table, Tag, Typography, Tooltip } from "antd";
+import { StyledAdminPageHeader, StyledCard } from "../customers/styles";
+import { Table, Tag, Typography, Tooltip, Divider, Button, Space } from "antd";
 import { CheckCircleOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router";
 
 import { useSelector } from "react-redux";
 import { productsSelector } from "../../app/products/selector";
 import { Helmet } from "react-helmet-async";
-const Text = Typography;
+import * as XLSX from "xlsx/xlsx.mjs";
+
+import ExportSVG from "../../utils/exportSVG";
+const { Text, Link, Title } = Typography;
 
 const Orders = () => {
   const navigate = useNavigate();
@@ -36,8 +40,48 @@ const Orders = () => {
     orderId: `${index + 1}`,
   }));
 
+  const dataToExport = filteredArray.map((data, index) => ({
+    Order_Id: `${index + 1}`,
+    Date: data[0].date,
+    Time: data[0].time,
+    Price: `$ ${data.reduce((total, item) => total + item.quantity, 0) * 100}`,
+    Status: "Paid",
+  }));
+
   const handleRowClick = (record) => {
     navigate(`${record.orderId}`);
+  };
+
+  const handleExportData = () => {
+    const workBook = XLSX.utils.book_new();
+
+    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+
+    const firstTableEndRow = dataToExport.length;
+    const firstTableTotalRow = ["Total", dataToExport.length];
+
+    XLSX.utils.sheet_add_json(worksheet, [firstTableTotalRow], {
+      skipHeader: true,
+      origin: XLSX.utils.encode_cell({ r: firstTableEndRow + 2, c: 0 }),
+    });
+
+    const maxColumnWidths = {
+      Order_Id: 30,
+      Date: 30,
+      Time: 30,
+      Price: 30,
+      Status: 30,
+    };
+
+    const columnWidths = Object.keys(maxColumnWidths).map((key) => ({
+      wch: maxColumnWidths[key],
+    }));
+
+    worksheet["!cols"] = columnWidths;
+
+    XLSX.utils.book_append_sheet(workBook, worksheet, "Sheet1");
+
+    XLSX.writeFile(workBook, "Customers_Data.xlsx");
   };
 
   const columns = [
@@ -59,9 +103,9 @@ const Orders = () => {
         };
       },
       render: (text, record) => (
-        <Text style={{ color: "blue" }} onClick={() => handleRowClick(record)}>
-          {text}
-        </Text>
+        <Link underline onClick={() => handleRowClick(record)}>
+          Order # {text}
+        </Link>
       ),
     },
     {
@@ -91,31 +135,28 @@ const Orders = () => {
   ];
 
   return (
-    <div>
+    <>
       <Helmet>
         <title>Admin - Orders</title>
       </Helmet>
       <Sidebar />
-      <div>
-        <PageHeader
-          title="Orders"
-          style={{
-            marginTop: "55px",
-            marginLeft: "17%",
-            fontWeight: "bold",
-            backgroundColor: "white",
-          }}
-        />
-      </div>
-      <Card
-        style={{
-          width: "80%",
-          marginLeft: "18.5%",
-          borderRadius: "10px",
-          marginTop: "20px",
-        }}
+      <StyledAdminPageHeader title="Orders" />
+      <StyledCard
+        title={filteredArray.length > 0 ? "Placed Orders" : ""}
+        extra={
+          filteredArray.length > 0 ? (
+            <Space>
+              <Text strong>Export to:</Text>
+              <Button size="small" type="text" onClick={handleExportData}>
+                <ExportSVG />
+              </Button>
+            </Space>
+          ) : (
+            ""
+          )
+        }
       >
-        <div>
+        {filteredArray.length > 0 ? (
           <Table
             style={{ paddingBottom: "50px" }}
             columns={columns}
@@ -124,9 +165,17 @@ const Orders = () => {
             bordered={true}
             dataSource={data}
           ></Table>
-        </div>
-      </Card>
-    </div>
+        ) : (
+          <>
+            <Title style={{ fontSize: "18px" }}>Placed Orders List</Title>
+            <Divider />
+            <Text>
+              No order is placed yet! Please make sure to place an order first.
+            </Text>
+          </>
+        )}
+      </StyledCard>
+    </>
   );
 };
 

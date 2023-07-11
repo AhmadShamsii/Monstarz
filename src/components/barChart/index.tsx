@@ -1,13 +1,13 @@
-import { Card, Typography, Empty } from "antd";
-import { CaretDownOutlined } from "@ant-design/icons";
+import { Empty } from "antd";
+
 import { Bar } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
 import Chart from "chart.js/auto";
 
 import { useSelector } from "react-redux";
 import { productsSelector } from "../../app/products/selector";
+import { StyledCard, StyledEmpty } from "./styles";
 
-const Text = Typography;
 Chart.register(CategoryScale);
 const BarChart = () => {
   const { totalOrders } = useSelector(productsSelector);
@@ -32,29 +32,10 @@ const BarChart = () => {
   const priceArray = itemsArray.map((entry) => entry * 100);
 
   return (
-    <div>
-      <Card
-        style={{
-          marginLeft: "35%",
-          width: "740px",
-          height: "500px",
-          marginTop: "50px",
-          borderRadius: "10px",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            display: "flex",
-          }}
-        >
-          <Text style={{ fontSize: "15.5px", fontWeight: "bold" }}>
-            Revenue Analytics
-          </Text>
-        </div>
+    <>
+      <StyledCard title="Revenue Analytics">
         {filteredOrders.length > 0 ? (
           <Bar
-            style={{ marginTop: "50px" }}
             data={{
               labels: Array.from(
                 { length: priceArray.length },
@@ -98,18 +79,12 @@ const BarChart = () => {
             width={600}
           />
         ) : (
-          <Empty
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%,-50%)",
-            }}
+          <StyledEmpty
             image={Empty.PRESENTED_IMAGE_SIMPLE}
           />
         )}
-      </Card>
-    </div>
+      </StyledCard>
+    </>
   );
 };
 export default BarChart;

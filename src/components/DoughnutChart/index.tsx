@@ -5,6 +5,8 @@ import Chart from "chart.js/auto";
 
 import { useSelector } from "react-redux";
 import { productsSelector } from "../../app/products/selector";
+import { StyledCard } from "./styles";
+import { StyledEmpty } from "../barChart/styles";
 
 const Text = Typography;
 Chart.register(CategoryScale);
@@ -41,39 +43,10 @@ const DoughnutChart = () => {
     .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
   return (
-    <div>
-      <Card
-        style={{
-          marginLeft: "84%",
-          width: "350px",
-          height: "500px",
-          marginTop: "50px",
-          borderRadius: "10px",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            display: "flex",
-          }}
-        >
-          <Text style={{ fontSize: "15.5px", fontWeight: "bold" }}>
-            Sales by Categories
-          </Text>
-          <Text
-            style={{
-              position: "relative",
-              left: "120px",
-              top: "-8px",
-              fontSize: "20px",
-              fontWeight: "bold",
-            }}
-          ></Text>
-        </div>
-
+    <>
+      <StyledCard title="Sales by Categories">
         {filteredArray.length > 0 ? (
           <Doughnut
-            style={{ marginTop: "50px" }}
             data={{
               labels: ["Monsters", "Robots", "Avatars", "Roboheads"],
               datasets: [
@@ -102,18 +75,10 @@ const DoughnutChart = () => {
             width={600}
           />
         ) : (
-          <Empty
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%,-50%)",
-            }}
-            image={Empty.PRESENTED_IMAGE_SIMPLE}
-          />
+          <StyledEmpty image={Empty.PRESENTED_IMAGE_SIMPLE} />
         )}
-      </Card>
-    </div>
+      </StyledCard>
+    </>
   );
 };
 export default DoughnutChart;

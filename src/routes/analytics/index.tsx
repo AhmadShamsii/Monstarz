@@ -1,13 +1,11 @@
+import { Typography, Space, Statistic, Tag, Table, Tooltip } from "antd";
+import { StyledAdminPageHeader } from "../customers/styles";
 import {
-  PageHeader,
-  Card,
-  Typography,
-  Space,
-  Statistic,
-  Tag,
-  Table,
-  Tooltip,
-} from "antd";
+  StyledSpace,
+  StyledCard,
+  StyledSpace2,
+  StyledOrdersCard,
+} from "./styles";
 import {
   EllipsisOutlined,
   ArrowUpOutlined,
@@ -24,8 +22,7 @@ import { useSelector } from "react-redux";
 import { productsSelector } from "../../app/products/selector";
 import { Helmet } from "react-helmet-async";
 
-const Title = Typography;
-const Text = Typography;
+const { Link, Text } = Typography;
 const Analytics = () => {
   const navigate = useNavigate();
   const { totalOrders } = useSelector(productsSelector);
@@ -85,9 +82,9 @@ const Analytics = () => {
       key: "orderId",
       width: "20%",
       render: (text, record) => (
-        <Text style={{ color: "blue" }} onClick={() => handleRowClick(record)}>
-          {text}
-        </Text>
+        <Link underline onClick={() => handleRowClick(record)}>
+          Order Number: {text}
+        </Link>
       ),
     },
     {
@@ -116,22 +113,12 @@ const Analytics = () => {
     },
   ];
   return (
-    <div>
+    <>
       <Helmet>
         <title>Admin - Dashboard</title>
       </Helmet>
       <Sidebar />
-      <div>
-        <PageHeader
-          title="Dashboard"
-          style={{
-            marginTop: "55px",
-            marginLeft: "17%",
-            fontWeight: "bold",
-            backgroundColor: "white",
-          }}
-        />
-      </div>
+      <StyledAdminPageHeader title="Dashboard" />
       <div
         style={{
           display: "flex",
@@ -139,147 +126,99 @@ const Analytics = () => {
           marginTop: "20px",
         }}
       >
-        <Card style={{ borderRadius: "10px", width: 350, marginLeft: "17%" }}>
-          <Space style={{ display: "flex", justifyContent: "space-between" }}>
-            <Title style={{ fontSize: "15.5px", fontWeight: "bold" }}>
-              Sales Total
-            </Title>
-            <span>
-              <EllipsisOutlined />
-            </span>
-          </Space>
-          <Space
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: "15px",
-              alignItems: "end",
-            }}
-          >
-            <Title style={{ fontSize: "22px", fontWeight: "bold" }}>
-              $ {salesTotal}{" "}
-            </Title>
-            <span>
-              <Statistic
-                value={11.28}
-                valueStyle={{
-                  color: "#3f8600",
-                  fontSize: "15px",
-                  display: "flex",
-                  justifyContent: "end",
-                }}
-                prefix={<ArrowUpOutlined />}
-                suffix="%"
-              />
-              <Text style={{ fontSize: "12px" }}>Compared to last month</Text>
-            </span>
-          </Space>
-        </Card>
+        <StyledCard
+          style={{ marginLeft: "17%" }}
+          title="Sales Total"
+          extra={<EllipsisOutlined />}
+        >
+          <StyledSpace>
+            <Text strong style={{ fontSize: "22px" }}>
+              $ {salesTotal}
+            </Text>
+            <StyledSpace2>
+              {filteredArray.length > 0 ? (
+                <>
+                  <Statistic
+                    value={11.28}
+                    valueStyle={{
+                      color: "#3f8600",
+                      fontSize: "15px",
+                    }}
+                    prefix={<ArrowUpOutlined />}
+                    suffix="%"
+                  />
+                  <Text style={{ fontSize: "12px" }}>
+                    Compared to last month
+                  </Text>
+                </>
+              ) : (
+                ""
+              )}
+            </StyledSpace2>
+          </StyledSpace>
+        </StyledCard>
 
-        {/* 
-      
-      
-      
-      */}
-        <Card style={{ borderRadius: "10px", width: 350 }}>
-          <Space style={{ display: "flex", justifyContent: "space-between" }}>
-            <Title style={{ fontSize: "15.5px", fontWeight: "bold" }}>
-              Average Order Value
-            </Title>
-            <span>
-              <EllipsisOutlined />
-            </span>
-          </Space>
-          <Space
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: "15px",
-              alignItems: "end",
-            }}
-          >
-            <Title style={{ fontSize: "22px", fontWeight: "bold" }}>
+        <StyledCard title="Average Order Value" extra={<EllipsisOutlined />}>
+          <StyledSpace>
+            <Text strong style={{ fontSize: "22px" }}>
               $ {averageOrderValue ? averageOrderValue?.toFixed(2) : 0}
-            </Title>
-            <span>
-              <Statistic
-                value={15}
-                valueStyle={{
-                  color: "#cf1322",
-                  fontSize: "15px",
-                  display: "flex",
-                  justifyContent: "end",
-                }}
-                prefix={<ArrowDownOutlined />}
-                suffix="%"
-              />
-              <Text style={{ fontSize: "12px" }}>Compared to last month</Text>
-            </span>
-          </Space>
-        </Card>
+            </Text>
+            <StyledSpace2>
+              {filteredArray.length > 0 ? (
+                <>
+                  <Statistic
+                    value={15}
+                    valueStyle={{
+                      color: "#cf1322",
+                      fontSize: "15px",
+                    }}
+                    prefix={<ArrowDownOutlined />}
+                    suffix="%"
+                  />
+                  <Text style={{ fontSize: "12px" }}>
+                    Compared to last month
+                  </Text>{" "}
+                </>
+              ) : (
+                ""
+              )}
+            </StyledSpace2>
+          </StyledSpace>
+        </StyledCard>
 
-        {/* 
-        
-        
-        */}
-        <Card style={{ borderRadius: "10px", width: 350 }}>
-          <Space style={{ display: "flex", justifyContent: "space-between" }}>
-            <Title style={{ fontSize: "15.5px", fontWeight: "bold" }}>
-              Total Orders
-            </Title>
-            <span>
-              <EllipsisOutlined />
-            </span>
-          </Space>
-          <Space
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: "15px",
-              alignItems: "end",
-            }}
-          >
-            <Title style={{ fontSize: "22px", fontWeight: "bold" }}>
+        <StyledCard title="Total Orders" extra={<EllipsisOutlined />}>
+          <StyledSpace>
+            <Text strong style={{ fontSize: "22px" }}>
               {filteredArray.length}
-            </Title>
-            <span>
-              <Statistic
-                value={44}
-                valueStyle={{
-                  color: "#3f8600",
-                  fontSize: "15px",
-                  display: "flex",
-                  justifyContent: "end",
-                }}
-                prefix={<ArrowUpOutlined />}
-                suffix="%"
-              />
-              <Text style={{ fontSize: "12px" }}>Compared to last month</Text>
-            </span>
-          </Space>
-        </Card>
+            </Text>
+            <StyledSpace2>
+              {filteredArray.length > 0 ? (
+                <>
+                  <Statistic
+                    value={44}
+                    valueStyle={{
+                      color: "#3f8600",
+                      fontSize: "15px",
+                    }}
+                    prefix={<ArrowUpOutlined />}
+                    suffix="%"
+                  />
+                  <Text style={{ fontSize: "12px" }}>
+                    Compared to last month
+                  </Text>
+                </>
+              ) : (
+                ""
+              )}
+            </StyledSpace2>
+          </StyledSpace>
+        </StyledCard>
       </div>
-      <div style={{ display: "flex" }}>
+      <Space style={{ display: "flex" }}>
         <BarChart />
         <DoughnutChart />
-      </div>
-      <Card
-        style={{
-          width: "80%",
-          marginLeft: "18.5%",
-          marginRight: "5%",
-          marginTop: "20px",
-        }}
-      >
-        <Text
-          style={{
-            fontSize: "15.5px",
-            fontWeight: "bold",
-            marginBottom: "30px",
-          }}
-        >
-          Recent Orders
-        </Text>
+      </Space>
+      <StyledOrdersCard title="Recent Orders">
         <Table
           style={{ paddingBottom: "50px" }}
           columns={columns}
@@ -288,8 +227,8 @@ const Analytics = () => {
           bordered={true}
           dataSource={data}
         ></Table>
-      </Card>
-    </div>
+      </StyledOrdersCard>
+    </>
   );
 };
 

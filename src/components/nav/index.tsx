@@ -1,5 +1,4 @@
-import { Layout, Menu, Badge, Space } from "antd";
-import { HeartFilled, HeartOutlined, UserOutlined } from "@ant-design/icons";
+import { Menu, Badge, Space } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { productsSelector } from "../../app/products/selector";
 import {
@@ -8,13 +7,8 @@ import {
   setFavColor,
 } from "../../app/products/slice";
 
-import {
-  ShoppingCartOutlined,
-  CloseCircleOutlined,
-  CaretUpOutlined,
-  CaretDownOutlined,
-} from "@ant-design/icons";
-import { Divider, Dropdown, Button, Typography } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { Divider, Typography } from "antd";
 import {
   removeFromCart,
   cartClearAll,
@@ -22,9 +16,34 @@ import {
   decrementQuantity,
   switchUser,
 } from "../../app/products/slice";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-const { Header } = Layout;
+
+import {
+  StyledMenuItem,
+  StyledCaretUpOutlined,
+  StyledCaretDownOutlined,
+  StyledCloseCircleOutlined,
+  StyledMenuItem2,
+  StyledNavHeartFilled,
+  StyledHeader,
+  StyledLogo,
+  StyledNavItems,
+  StyledDropdown1,
+  StyledMenu,
+  StyledDropdownTitle1,
+  StyledButtonDropdown1,
+  StyledUserOutlined,
+  StyledDropdown2,
+  StyledDropdownTitle2,
+  StyledEmptyHeartFilled,
+  StyledEmptyText,
+  StyledHeartOutlined,
+  StyledDropdown3,
+  StyledCartClearAll,
+  StyledShoppingCartOutlined,
+  StyledGoToCheckout,
+} from "./styles";
 
 const Nav = () => {
   const { cart, favourites, iconColor, admin } = useSelector(productsSelector);
@@ -32,43 +51,32 @@ const Nav = () => {
   const [isCartDropdownOpen, setIsCartDropdownOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const { Title, Text } = Typography;
+  const { Text } = Typography;
 
   const customCartItems = cart.map((item) => {
     const index = item;
     const data = cart;
 
     return (
-      <Menu.Item
-        style={{
-          width: "230px",
-          fontSize: "15px",
-          margin: "10px 0",
-          color: "#0d3b66",
-        }}
-        key={item.id}
-      >
+      <StyledMenuItem key={item.id}>
         <Text style={{ fontSize: "16px" }}>
           {item.name || `${item.first_name}  ${item.last_name}`}
         </Text>
         <Text
-          style={{ fontWeight: "bold", marginLeft: "5px", fontSize: "16px" }}
+          style={{ marginLeft: "5px", fontWeight: "bold", fontSize: "16px" }}
         >
           ({item.quantity})
         </Text>
-        <CaretUpOutlined
-          style={{ position: "absolute", right: "35px", top: "4px" }}
+        <StyledCaretUpOutlined
           onClick={() => dispatch(incrementQuantity(index))}
         />
-        <CaretDownOutlined
-          style={{ position: "absolute", right: "35px", top: "15px" }}
+        <StyledCaretDownOutlined
           onClick={() => dispatch(decrementQuantity(index))}
         />
-        <CloseCircleOutlined
+        <StyledCloseCircleOutlined
           onClick={() => dispatch(removeFromCart({ index, data }))}
-          style={{ position: "absolute", right: "10px", top: "9px" }}
         />
-      </Menu.Item>
+      </StyledMenuItem>
     );
   });
 
@@ -90,14 +98,12 @@ const Nav = () => {
     const index = fav;
     const data = favs;
     return (
-      <Menu.Item style={{ width: "200px", fontSize: "15px" }} key={fav.id}>
+      <StyledMenuItem2 key={fav.id}>
         <Text>{fav.name || `${fav.first_name}  ${fav.last_name}`}</Text>
-        <HeartFilled
+        <StyledNavHeartFilled
+          size={30}
           style={{
             color: iconColor[index.id] || "#CDE4F9",
-            position: "absolute",
-            right: "10px",
-            top: "9px",
           }}
           onClick={(e) => {
             e.stopPropagation();
@@ -106,53 +112,17 @@ const Nav = () => {
             handleFavourite(index);
           }}
         />
-      </Menu.Item>
+      </StyledMenuItem2>
     );
   });
 
   return (
-    <Header
-      style={{
-        padding: "0px",
-        position: "fixed",
-        zIndex: "110",
-        width: "100%",
-        backgroundColor: "#0d3b66",
-        margin: "0px",
-      }}
-    >
-      <div className="logo" />
-      <Menu
-        style={{ position: "relative" }}
-        className="header-items"
-        defaultSelectedKeys={["1"]}
-      >
-        <div>
-          <Link to="/">
-            <span
-              className="font-family-primary"
-              style={{
-                fontSize: "30px",
-                position: "absolute",
-                left: "10%",
-                color: "#f8f9fa",
-              }}
-            >
-              Monstarz
-            </span>
-          </Link>
-        </div>
-        <div
-          className="font-family-tertiary"
-          style={{
-            display: "flex",
-            fontSize: "25px",
-            position: "absolute",
-            left: "50%",
-            transform: "translateX(-50%)",
-            paddingTop: "10px",
-          }}
-        >
+    <StyledHeader>
+      <Menu style={{ position: "relative" }} defaultSelectedKeys={["1"]}>
+        <Link to="/">
+          <StyledLogo>Monstarz</StyledLogo>
+        </Link>
+        <StyledNavItems>
           <Menu.Item key="home">
             <Link style={{ color: "#f8f9fa" }} to="/">
               Home
@@ -182,301 +152,152 @@ const Nav = () => {
           ) : (
             ""
           )}
-        </div>
-        <div>
-          <div style={{ position: "absolute", right: "10%" }}>
-            {/* 
-            
-            
-            
-            
-            */}
-            <Dropdown
-              trigger={["click"]}
-              placement="bottom"
-              className="dropdown1"
-              overlay={
-                <Menu
-                  style={{
-                    borderRadius: "5px",
-                    backgroundColor: "#f8f9fa",
-                    width: "200px",
-                  }}
-                >
-                  <Title
-                    level={2}
-                    className="font-family-secondary"
-                    style={{
-                      fontSize: "18px",
-                      paddingLeft: "12px",
-                      paddingTop: "10px",
-                    }}
-                  >
-                    Switch user
-                  </Title>
-                  <Divider />
-                  {admin ? (
-                    <Link to="/">
-                      <Button
-                        style={{
-                          position: "relative",
-                          top: "50%",
-                          left: "50%",
-                          transform: "translate(-50%,-50%)",
-                          backgroundColor: "#0d3b66",
-                          color: "white",
-                        }}
-                        onClick={() => {
-                          dispatch(switchUser());
-                        }}
-                      >
-                        Switch to {admin ? "User" : "Admin"}
-                      </Button>
-                    </Link>
-                  ) : (
-                    <Button
-                      style={{
-                        position: "relative",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%,-50%)",
-                        backgroundColor: "#0d3b66",
-                        color: "white",
-                      }}
+        </StyledNavItems>
+        <Space style={{ position: "absolute", right: "8.7%" }}>
+          <StyledDropdown1
+            trigger={["click"]}
+            placement="bottom"
+            overlay={
+              <StyledMenu style={{ width: "200px" }}>
+                <StyledDropdownTitle1 style={{ fontSize: "19px" }}>
+                  Switch user
+                </StyledDropdownTitle1>
+                <Divider />
+                {admin ? (
+                  <Link to="/">
+                    <StyledButtonDropdown1
                       onClick={() => {
                         dispatch(switchUser());
                       }}
                     >
                       Switch to {admin ? "User" : "Admin"}
-                    </Button>
-                  )}
-                </Menu>
-              }
+                    </StyledButtonDropdown1>
+                  </Link>
+                ) : (
+                  <StyledButtonDropdown1
+                    onClick={() => {
+                      dispatch(switchUser());
+                    }}
+                  >
+                    Switch to {admin ? "User" : "Admin"}
+                  </StyledButtonDropdown1>
+                )}
+              </StyledMenu>
+            }
+          >
+            <StyledUserOutlined
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+            />
+          </StyledDropdown1>
+          <StyledDropdown2
+            placement="bottom"
+            overlay={
+              <StyledMenu>
+                <StyledDropdownTitle2 style={{ fontSize: "19px" }}>
+                  Favourites
+                </StyledDropdownTitle2>
+                <Divider style={{ marginBottom: "6px" }}></Divider>
+                {favs.length > 0 ? (
+                  customFavItems
+                ) : (
+                  <Menu.Item
+                    style={{
+                      width: "200px",
+                    }}
+                  >
+                    <StyledEmptyHeartFilled />
+                    <StyledEmptyText>No Favourites yet</StyledEmptyText>
+                  </Menu.Item>
+                )}
+                <Divider style={{ margin: "6px 0" }}></Divider>
+              </StyledMenu>
+            }
+            trigger={["click"]}
+          >
+            <Badge
+              color="#1890ff"
+              style={{
+                position: "absolute",
+                top: "-2px",
+                right: "20px",
+              }}
+              count={favs.length > 0 ? favs.length : ""}
             >
-              <UserOutlined
-                style={{
-                  fontSize: "24px",
-                  color: "#f8f9fa",
-                  marginRight: "22px",
-                  position: "relative",
-                  right: "100%",
-                }}
+              <StyledHeartOutlined
                 onClick={(e) => {
                   e.preventDefault();
                 }}
               />
-            </Dropdown>
-
-            {/* 
-
-
-
-*/}
-            <Dropdown
-              className="dropdown2"
-              placement="bottom"
-              overlay={
-                <Menu
-                  style={{
-                    borderRadius: "5px",
-                    backgroundColor: "#f8f9fa",
-                  }}
-                >
-                  <Title
-                    level={2}
-                    className="font-family-secondary"
-                    style={{
-                      fontSize: "18px",
-                      paddingLeft: "12px",
-                      paddingTop: "10px",
+            </Badge>
+          </StyledDropdown2>
+          <StyledDropdown3
+            placement="bottom"
+            visible={isCartDropdownOpen}
+            overlay={
+              <StyledMenu onClick={() => setIsCartDropdownOpen(true)}>
+                <StyledDropdownTitle2 style={{ fontSize: " 19px" }}>
+                  Cart Items
+                </StyledDropdownTitle2>
+                {cart.length > 0 ? (
+                  <StyledCartClearAll
+                    onClick={() => {
+                      dispatch(cartClearAll());
                     }}
                   >
-                    Favourites
-                  </Title>
-                  <Divider style={{ marginBottom: "6px" }}></Divider>
-                  {favs.length > 0 ? (
-                    customFavItems
-                  ) : (
-                    <Menu.Item
-                      style={{
-                        width: "200px",
-                      }}
-                    >
-                      <HeartFilled
-                        style={{
-                          fontSize: "40px",
-                          display: "flex",
-                          justifyContent: "center",
-                          color: "#dee2e6",
-                        }}
-                      />
-                      <br />
-                      <Text
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          color: "gray",
-                        }}
-                      >
-                        No Favourites yet
-                      </Text>
-                    </Menu.Item>
-                  )}
-                  <Divider style={{ margin: "6px 0" }}></Divider>
-                </Menu>
-              }
-              trigger={["click"]}
-            >
-              <Badge
-                style={{
-                  backgroundColor: "#1890ff",
-                  position: "absolute",
-                  top: "-2px",
-                  right: "20px",
-                }}
-                count={favs.length > 0 ? favs.length : ""}
-              >
-                <HeartOutlined
-                  style={{
-                    fontSize: "24px",
-                    color: "#f8f9fa",
-                    marginRight: "20px",
-                  }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                  }}
-                />
-              </Badge>
-            </Dropdown>
+                    Clear All
+                  </StyledCartClearAll>
+                ) : (
+                  ""
+                )}
 
-            {/* ///////////////////
-          
-
-
-
-          
-          
-          */}
-            <Dropdown
-              className="dropdown3"
-              placement="bottom"
-              visible={isCartDropdownOpen}
-              overlay={
-                <Menu
-                  onClick={() => setIsCartDropdownOpen(true)}
-                  style={{
-                    borderRadius: "5px",
-                    backgroundColor: "#f8f9fa",
-                  }}
-                >
-                  <Title
-                    className="font-family-secondary"
-                    level={2}
+                <Divider style={{ marginBottom: "6px" }}></Divider>
+                {cart.length > 0 ? (
+                  customCartItems
+                ) : (
+                  <Menu.Item
                     style={{
-                      fontSize: "18px",
-                      paddingLeft: "12px",
-                      paddingTop: "10px",
+                      width: "200px",
                     }}
                   >
-                    Cart Items
-                  </Title>
-                  {cart.length > 0 ? (
-                    <Button
-                      style={{
-                        position: "absolute",
-                        right: "15px",
-                        top: "8px",
-                        fontSize: "12px",
-                        padding: "0px 5px",
-                        backgroundColor: "#0d3b66",
-                        color: "white",
-                      }}
-                      onClick={() => {
-                        dispatch(cartClearAll());
-                      }}
+                    <StyledShoppingCartOutlined />
+                    <StyledEmptyText>Cart is empty</StyledEmptyText>
+                  </Menu.Item>
+                )}
+                <Divider style={{ margin: "6px 0" }}></Divider>
+                {cart.length > 0 ? (
+                  <Link to="checkout">
+                    <StyledGoToCheckout
+                      onClick={() => setIsCartDropdownOpen(false)}
                     >
-                      Clear All
-                    </Button>
-                  ) : (
-                    ""
-                  )}
-
-                  <Divider style={{ marginBottom: "6px" }}></Divider>
-                  {cart.length > 0 ? (
-                    customCartItems
-                  ) : (
-                    <Menu.Item
-                      style={{
-                        width: "200px",
-                      }}
-                    >
-                      <ShoppingCartOutlined
-                        style={{
-                          fontSize: "40px",
-                          display: "flex",
-                          justifyContent: "center",
-                          color: "#dee2e6",
-                        }}
-                      />
-                      <br />
-                      <Text
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          color: "#6c757d",
-                        }}
-                      >
-                        Cart is empty
-                      </Text>
-                    </Menu.Item>
-                  )}
-                  <Divider style={{ margin: "6px 0" }}></Divider>
-                  {cart.length > 0 ? (
-                    <Link to="checkout">
-                      <Button
-                        style={{
-                          position: "absolute",
-                          left: "50%",
-                          transform: "translate(-50%,0)",
-                          fontSize: "13px",
-                          backgroundColor: "#0d3b66",
-                          color: "white",
-                        }}
-                        onClick={() => setIsCartDropdownOpen(false)}
-                      >
-                        Go to Checkout
-                      </Button>
-                    </Link>
-                  ) : (
-                    ""
-                  )}
-                  <Divider></Divider>
-                </Menu>
-              }
-              trigger={cart.length > 0 ? ["click"] : ["contextMenu"]}
-            >
-              <Badge
+                      Go to Checkout
+                    </StyledGoToCheckout>
+                  </Link>
+                ) : (
+                  ""
+                )}
+                <Divider></Divider>
+              </StyledMenu>
+            }
+            trigger={cart.length > 0 ? ["click"] : ["contextMenu"]}
+          >
+            <Badge color="#1890ff" count={cart.length > 0 ? cart.length : ""}>
+              <ShoppingCartOutlined
                 style={{
-                  backgroundColor: "#1890ff",
+                  fontSize: "27px",
+                  color: "#f8f9fa",
                 }}
-                count={cart.length > 0 ? cart.length : ""}
-              >
-                <ShoppingCartOutlined
-                  style={{
-                    fontSize: "27px",
-                    color: "#f8f9fa",
-                  }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsCartDropdownOpen(!isCartDropdownOpen);
-                  }}
-                />
-              </Badge>
-            </Dropdown>
-          </div>
-        </div>
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsCartDropdownOpen(!isCartDropdownOpen);
+                }}
+              />
+            </Badge>
+          </StyledDropdown3>
+        </Space>
       </Menu>
-    </Header>
+    </StyledHeader>
   );
 };
 

@@ -100,21 +100,6 @@ body {
 .font-family-tertiary {
   font-family: "Bigelow Rules", cursive;
 }
-.dropdown1 {
-  position: fixed;
-  top: 0px;
-  right: 10%;
-}
-.dropdown2 {
-  position: fixed;
-  top: 17px;
-  right: 11%;
-}
-.dropdown3 {
-  position: fixed;
-  top: 15px;
-  right: 10%;
-}
 .ant-carousel .slick-dots li button {
   position: absolute;
   top: -200px;
