@@ -12,7 +12,7 @@ export const StyledSpace = styled(Space)`
 
 export const StyledCard = styled(Card)`
   border-radius: 10px;
-  width: 350px;
+  min-width: 25.5%;
 `;
 export const StyledSpace2 = styled(Space)`
   display: flex;
@@ -20,7 +20,7 @@ export const StyledSpace2 = styled(Space)`
   align-items: flex-end;
 `;
 export const StyledOrdersCard = styled(Card)`
-  width: 80%;
+  width: 81.8%;
   margin-left: 17%;
   margin-right: 5%;
   margin-top: 20px;

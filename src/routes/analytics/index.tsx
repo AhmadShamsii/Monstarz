@@ -127,7 +127,7 @@ const Analytics = () => {
         }}
       >
         <StyledCard
-          style={{ marginLeft: "220px" }}
+          style={{ marginLeft: "240px" }}
           title="Sales Total"
           extra={<EllipsisOutlined />}
         >

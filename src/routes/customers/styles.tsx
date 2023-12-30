@@ -10,7 +10,7 @@ export const StyledAdminPageHeader = styled(PageHeader)`
   background-color: white;
 `;
 export const StyledCard = styled(Card)`
-  width: 80%;
+  width: 81.8%;
   margin-left: 259px;
   border-radius: 10px;
   margin-top: 20px;
