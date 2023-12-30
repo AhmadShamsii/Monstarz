@@ -15,6 +15,8 @@ These are the list of core technologies, libraries, and frameworks used to build
 - React Router
 - Ant design
 - Styled Components
+- Chart.js
+- Xlsx
 
 ## Installation
 
