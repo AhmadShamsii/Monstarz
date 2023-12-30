@@ -1,3 +1,5 @@
+import { SpeedInsights } from "@vercel/speed-insights/react";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { useEffect } from "react";
@@ -32,30 +34,33 @@ const App = () => {
   const helmetContext = {};
 
   return (
-    <HelmetProvider context={helmetContext}>
-      <BrowserRouter>
-        <Layout />
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="shop" element={<Shop />} />
-          <Route path="shop/monsters" element={<Monsters />} />
-          <Route path="shop/robots" element={<Robots />} />
-          <Route path="shop/avatars" element={<Avatars />} />
-          <Route path="shop/roboHeads" element={<RoboHeads />} />
-          <Route path={"checkout"} element={<Checkout />} />
-          <Route path={"/analytics"} element={<Analytics />} />
-          <Route path={"/analytics/products"} element={<Products />} />
-          <Route path={"/analytics/customers"} element={<Customers />} />
-          <Route path={"/analytics/orders"} element={<Orders />} />
-          <Route
-            path={"/analytics/orders/:orderId"}
-            element={<OrderDetails />}
-          />
-        </Routes>
-      </BrowserRouter>
-    </HelmetProvider>
+    <>
+      <HelmetProvider context={helmetContext}>
+        <BrowserRouter>
+          <Layout />
+          <Routes>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="shop" element={<Shop />} />
+            <Route path="shop/monsters" element={<Monsters />} />
+            <Route path="shop/robots" element={<Robots />} />
+            <Route path="shop/avatars" element={<Avatars />} />
+            <Route path="shop/roboHeads" element={<RoboHeads />} />
+            <Route path={"checkout"} element={<Checkout />} />
+            <Route path={"/analytics"} element={<Analytics />} />
+            <Route path={"/analytics/products"} element={<Products />} />
+            <Route path={"/analytics/customers"} element={<Customers />} />
+            <Route path={"/analytics/orders"} element={<Orders />} />
+            <Route
+              path={"/analytics/orders/:orderId"}
+              element={<OrderDetails />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </HelmetProvider>
+      <SpeedInsights />
+    </>
   );
 };
 
