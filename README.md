@@ -22,8 +22,8 @@ These are the list of core technologies, libraries, and frameworks used to build
 
 If you want to run the demo site locally, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/AhmadShamsii/monstarz`
-2. Change into the project directory: `cd monstarz`
+1. Clone the repository: `git clone https://github.com/AhmadShamsii/Monstarz`
+2. Change into the project directory: `cd Monstarz`
 3. Install dependencies: `npm install`
 4. Start the development server: `npm start`
 5. Open your browser and visit: `http://localhost:3000`
