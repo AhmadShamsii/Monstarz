@@ -1,11 +1,15 @@
-import { Typography, Space, Statistic, Tag, Table, Tooltip } from "antd";
-import { StyledAdminPageHeader } from "../customers/styles";
 import {
-  StyledSpace,
-  StyledCard,
-  StyledSpace2,
-  StyledOrdersCard,
-} from "./styles";
+  Typography,
+  Space,
+  Statistic,
+  Tag,
+  Table,
+  Tooltip,
+  Col,
+  Row,
+  PageHeader,
+  Card,
+} from "antd";
 import {
   EllipsisOutlined,
   ArrowUpOutlined,
@@ -21,7 +25,7 @@ import { useSelector } from "react-redux";
 import { productsSelector } from "../../app/products/selector";
 import { Helmet } from "react-helmet-async";
 import DoughnutChart from "../../components/DoughnutChart";
-
+import { StyledAdminPageHeader } from "../customers/styles";
 const { Link, Text } = Typography;
 const Analytics = () => {
   const navigate = useNavigate();
@@ -119,115 +123,134 @@ const Analytics = () => {
       </Helmet>
       <Sidebar />
       <StyledAdminPageHeader title="Dashboard" />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          marginTop: "20px",
-        }}
-      >
-        <StyledCard
-          style={{ marginLeft: "240px" }}
-          title="Sales Total"
-          extra={<EllipsisOutlined />}
-        >
-          <StyledSpace>
-            <Text strong style={{ fontSize: "22px" }}>
-              $ {salesTotal}
-            </Text>
-            <StyledSpace2>
-              {filteredArray.length > 0 ? (
-                <>
-                  <Statistic
-                    value={11.28}
-                    valueStyle={{
-                      color: "#3f8600",
-                      fontSize: "15px",
-                    }}
-                    prefix={<ArrowUpOutlined />}
-                    suffix="%"
-                  />
-                  <Text style={{ fontSize: "12px" }}>
-                    Compared to last month
-                  </Text>
-                </>
-              ) : (
-                ""
-              )}
-            </StyledSpace2>
-          </StyledSpace>
-        </StyledCard>
+      <Row style={{ margin: "0 20px 0 260px" }} gutter={[24, 24]}>
+        <Col span={8}>
+          <Card
+            style={{ borderRadius: "10px" }}
+            title="Sales Total"
+            extra={<EllipsisOutlined />}
+          >
+            <Space>
+              <Text strong style={{ fontSize: "22px" }}>
+                $ {salesTotal}
+              </Text>
+              <Space>
+                {filteredArray.length > 0 ? (
+                  <>
+                    <Statistic
+                      value={11.28}
+                      valueStyle={{
+                        color: "#3f8600",
+                        fontSize: "15px",
+                      }}
+                      prefix={<ArrowUpOutlined />}
+                      suffix="%"
+                    />
+                    <Text style={{ fontSize: "12px" }}>
+                      Compared to last month
+                    </Text>
+                  </>
+                ) : (
+                  ""
+                )}
+              </Space>
+            </Space>
+          </Card>
+        </Col>
+        <Col span={8}>
+          <Card
+            style={{ borderRadius: "10px" }}
+            title="Average Order Value"
+            extra={<EllipsisOutlined />}
+          >
+            <Space>
+              <Text strong style={{ fontSize: "22px" }}>
+                $ {averageOrderValue ? averageOrderValue?.toFixed(2) : 0}
+              </Text>
+              <Space>
+                {filteredArray.length > 0 ? (
+                  <>
+                    <Statistic
+                      value={15}
+                      valueStyle={{
+                        color: "#cf1322",
+                        fontSize: "15px",
+                      }}
+                      prefix={<ArrowDownOutlined />}
+                      suffix="%"
+                    />
+                    <Text style={{ fontSize: "12px" }}>
+                      Compared to last month
+                    </Text>{" "}
+                  </>
+                ) : (
+                  ""
+                )}
+              </Space>
+            </Space>
+          </Card>
+        </Col>
+        <Col span={8}>
+          <Card
+            style={{ borderRadius: "10px" }}
+            title="Total Orders"
+            extra={<EllipsisOutlined />}
+          >
+            <Space>
+              <Text strong style={{ fontSize: "22px" }}>
+                {filteredArray.length}
+              </Text>
+              <Space>
+                {filteredArray.length > 0 ? (
+                  <>
+                    <Statistic
+                      value={44}
+                      valueStyle={{
+                        color: "#3f8600",
+                        fontSize: "15px",
+                      }}
+                      prefix={<ArrowUpOutlined />}
+                      suffix="%"
+                    />
+                    <Text style={{ fontSize: "12px" }}>
+                      Compared to last month
+                    </Text>
+                  </>
+                ) : (
+                  ""
+                )}
+              </Space>
+            </Space>
+          </Card>
+        </Col>
+      </Row>
 
-        <StyledCard title="Average Order Value" extra={<EllipsisOutlined />}>
-          <StyledSpace>
-            <Text strong style={{ fontSize: "22px" }}>
-              $ {averageOrderValue ? averageOrderValue?.toFixed(2) : 0}
-            </Text>
-            <StyledSpace2>
-              {filteredArray.length > 0 ? (
-                <>
-                  <Statistic
-                    value={15}
-                    valueStyle={{
-                      color: "#cf1322",
-                      fontSize: "15px",
-                    }}
-                    prefix={<ArrowDownOutlined />}
-                    suffix="%"
-                  />
-                  <Text style={{ fontSize: "12px" }}>
-                    Compared to last month
-                  </Text>{" "}
-                </>
-              ) : (
-                ""
-              )}
-            </StyledSpace2>
-          </StyledSpace>
-        </StyledCard>
+      <Row style={{ margin: "0 20px 24px 260px" }} gutter={[24, 24]}>
+        <Col span={16}>
+          <BarChart />
+        </Col>
+        <Col span={8}>
+          <DoughnutChart />
+        </Col>
+      </Row>
 
-        <StyledCard title="Total Orders" extra={<EllipsisOutlined />}>
-          <StyledSpace>
-            <Text strong style={{ fontSize: "22px" }}>
-              {filteredArray.length}
-            </Text>
-            <StyledSpace2>
-              {filteredArray.length > 0 ? (
-                <>
-                  <Statistic
-                    value={44}
-                    valueStyle={{
-                      color: "#3f8600",
-                      fontSize: "15px",
-                    }}
-                    prefix={<ArrowUpOutlined />}
-                    suffix="%"
-                  />
-                  <Text style={{ fontSize: "12px" }}>
-                    Compared to last month
-                  </Text>
-                </>
-              ) : (
-                ""
-              )}
-            </StyledSpace2>
-          </StyledSpace>
-        </StyledCard>
-      </div>
-      <Space style={{ display: "flex", marginLeft: "17%" }}>
-        <BarChart />
-        <DoughnutChart />
-      </Space>
-      <StyledOrdersCard title="Recent Orders">
-        <Table
-          style={{ paddingBottom: "50px" }}
-          columns={columns}
-          size="small"
-          pagination={false}
-          bordered={true}
-          dataSource={data}
-        ></Table>
-      </StyledOrdersCard>
+      <Row style={{ margin: "0 20px 24px 260px" }} gutter={[24, 24]}>
+        <Col span={24}>
+          <Card
+            style={{ borderRadius: "10px", marginTop: "24px" }}
+            title="Recent Orders"
+          >
+            <Table
+              style={{ paddingBottom: "50px" }}
+              columns={columns}
+              size="small"
+              pagination={false}
+              bordered={true}
+              dataSource={data}
+            ></Table>
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 };

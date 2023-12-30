@@ -5,13 +5,15 @@ const Text = Typography;
 
 export const StyledAdminPageHeader = styled(PageHeader)`
   margin-top: 55px;
-  margin-left: 239px;
+  margin-left: 240px;
+  padding-left:   30px;
+  margin-bottom: 24px;
   font-weight: bold;
   background-color: white;
 `;
 export const StyledCard = styled(Card)`
-  width: 81.8%;
-  margin-left: 259px;
+  margin-left: 270px;
+  margin-right: 34px;
   border-radius: 10px;
   margin-top: 20px;
 `;
