@@ -7,7 +7,6 @@ import {
   Tooltip,
   Col,
   Row,
-  PageHeader,
   Card,
 } from "antd";
 import {
@@ -130,7 +129,13 @@ const Analytics = () => {
             title="Sales Total"
             extra={<EllipsisOutlined />}
           >
-            <Space>
+            <Space
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
               <Text strong style={{ fontSize: "22px" }}>
                 $ {salesTotal}
               </Text>
@@ -163,7 +168,13 @@ const Analytics = () => {
             title="Average Order Value"
             extra={<EllipsisOutlined />}
           >
-            <Space>
+            <Space
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
               <Text strong style={{ fontSize: "22px" }}>
                 $ {averageOrderValue ? averageOrderValue?.toFixed(2) : 0}
               </Text>
@@ -196,7 +207,13 @@ const Analytics = () => {
             title="Total Orders"
             extra={<EllipsisOutlined />}
           >
-            <Space>
+            <Space
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
               <Text strong style={{ fontSize: "22px" }}>
                 {filteredArray.length}
               </Text>
