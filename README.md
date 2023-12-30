@@ -8,7 +8,7 @@ Monstarz is an e-commerce store to but characters like monsters, robots and more
 
 ## Technologies Used
 
-These are the list of core technologies, libraries, and frameworks used to build DRS.
+These are the list of core technologies, libraries, and frameworks used to build Monstarz.
 
 - React
 - Redux
