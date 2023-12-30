@@ -2,8 +2,7 @@ import styled from "styled-components";
 import { Card, Empty } from "antd";
 
 export const StyledCard = styled(Card)`
-  margin-left: 35%;
-  width: 740px;
+  width: 780px;
   height: 500px;
   margin-top: 50px;
   border-radius: 10px;

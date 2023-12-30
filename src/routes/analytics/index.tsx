@@ -15,12 +15,12 @@ import {
 } from "@ant-design/icons";
 import Sidebar from "../../components/sidebar";
 import BarChart from "../../components/barChart";
-import DoughnutChart from "../../components/doughnutChart";
 import { useNavigate } from "react-router";
 
 import { useSelector } from "react-redux";
 import { productsSelector } from "../../app/products/selector";
 import { Helmet } from "react-helmet-async";
+import DoughnutChart from "../../components/DoughnutChart";
 
 const { Link, Text } = Typography;
 const Analytics = () => {
@@ -127,7 +127,7 @@ const Analytics = () => {
         }}
       >
         <StyledCard
-          style={{ marginLeft: "17%" }}
+          style={{ marginLeft: "14%" }}
           title="Sales Total"
           extra={<EllipsisOutlined />}
         >
@@ -214,7 +214,7 @@ const Analytics = () => {
           </StyledSpace>
         </StyledCard>
       </div>
-      <Space style={{ display: "flex" }}>
+      <Space style={{ display: "flex", marginLeft: "17%" }}>
         <BarChart />
         <DoughnutChart />
       </Space>

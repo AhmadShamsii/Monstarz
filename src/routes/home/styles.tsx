@@ -130,14 +130,13 @@ export const StyledCategoryTitle = styled(Text)`
   font-weight: 600;
 `;
 export const StyledDivider2 = styled(Divider)`
-  padding-left: 1.75%;
+  padding-left: 4%;
   padding-top: 5%;
   font-family: "Bigelow Rules", cursive;
 `;
 export const StyledSpace2 = styled(Space)`
   display: flex;
-  justify-content: start;
-  margin-left: 11%;
+  justify-content: center;
 `;
 export const StyledCard = styled(Card)`
   background-color: white;
@@ -198,6 +197,8 @@ export const StyledSeeAllText = styled(Text)`
 `;
 export const StyledSpace3 = styled(Space)`
   padding: 10% 10% 5% 10%;
+  display: flex;
+  justify-content: center;
   width: 100%;
   background-color: #0d3b66;
   clip-path: polygon(0 45%, 100% 0%, 100% 100%, 0 100%);

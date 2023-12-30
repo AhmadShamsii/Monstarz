@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { Typography, Card, Space } from "antd";
-import { ArrowLeftOutlined } from "@ant-design/icons";
 const Text = Typography;
 
 export const StyledSpace = styled(Space)`
   display: flex;
-  justify-content: start;
+  justify-content: center;
   gap: 0px;
   margin-left: 10%;
   margin-right: 5%;

@@ -80,9 +80,9 @@ body {
 .monsters-page {
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: center;
   gap: 4.5px;
-  margin-left: 9.5%;
+  margin: 0 3%;
 }
 .montser-image-checkout {
   width: 100px;

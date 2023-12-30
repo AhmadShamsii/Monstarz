@@ -57,6 +57,8 @@ const Nav = () => {
     const index = item;
     const data = cart;
 
+    console.log(index, "cart");
+
     return (
       <StyledMenuItem key={item.id}>
         <Text style={{ fontSize: "16px" }}>

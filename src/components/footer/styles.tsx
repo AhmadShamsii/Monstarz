@@ -11,4 +11,5 @@ export const StyledSpaceFooter = styled(Space)`
   font-size: 15px;
   display: flex;
   align-items: flex-start;
+  justify-content: center;
 `;

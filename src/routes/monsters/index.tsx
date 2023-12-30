@@ -30,7 +30,7 @@ import {
   StyledHeartFilled,
   StyledAddToCart,
   StyledCardTitle,
-} from "../../components/home/styles";
+} from "../home/styles";
 import { StyledCard } from "./styles";
 import { Helmet } from "react-helmet-async";
 

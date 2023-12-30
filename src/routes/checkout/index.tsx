@@ -10,7 +10,16 @@ import {
   cartClearAll,
   recordOrders,
 } from "../../app/products/slice";
-import { Typography, Divider, Avatar, message, Button, Space } from "antd";
+import {
+  Typography,
+  Divider,
+  Avatar,
+  message,
+  Button,
+  Space,
+  Col,
+  Row,
+} from "antd";
 import {
   CaretUpOutlined,
   CaretDownOutlined,
@@ -40,6 +49,7 @@ import {
   StyledReceiptButtons,
 } from "./styles";
 import html2canvas from "html2canvas";
+import { createGlobalStyle } from "styled-components";
 
 const { Text } = Typography;
 
@@ -145,12 +155,10 @@ const Checkout = () => {
       />
       <Divider />
       <StyledCardHeader>
-        <>
-          <Text style={{ marginLeft: "35px" }}>Character</Text>
-          <Text style={{ marginLeft: "190px" }}>Name</Text>
-          <Text style={{ marginLeft: "300px" }}>Quantity X Price</Text>
-          <Text style={{ position: "absolute", right: "82px" }}>Total</Text>
-        </>
+        <Col span={6}>Character</Col>
+        <Col span={6}>Name</Col>
+        <Col span={6}>Quantity X Price</Col>
+        <Col span={6}>Total</Col>
       </StyledCardHeader>
       {cart.map((cartItem, index) => {
         let set;
@@ -165,28 +173,29 @@ const Checkout = () => {
         }
         return (
           <StyledCardItem key={index}>
-            <Avatar
-              size={64}
-              style={{ width: "100px", marginLeft: "30px" }}
-              src={`https://robohash.org/${cartItem.id}?set=set${set}`}
-            />
-            <StyledCardItemName>
+            <Col span={6}>
+              <Avatar
+                size={64}
+                style={{ width: "100px", marginLeft: "30px" }}
+                src={`https://robohash.org/${cartItem.id}?set=set${set}`}
+              />{" "}
+            </Col>
+
+            <Col span={6}>
               {`${cartItem.first_name}  ${cartItem.last_name}`}
-            </StyledCardItemName>
-            <StyledCardItemQuantity>
+            </Col>
+            <Col span={6}>
               {cartItem.quantity} x 100$
               <CaretUpOutlined
-                style={{ position: "absolute", right: "-35px", top: "2px" }}
-                onClick={() => dispatch(incrementQuantity(index))}
+                style={{ position: "absolute", left: "200px", top: "2px" }}
+                onClick={() => dispatch(incrementQuantity(cartItem))}
               />
               <CaretDownOutlined
-                style={{ position: "absolute", right: "-35px", top: "14px" }}
-                onClick={() => dispatch(decrementQuantity(index))}
+                style={{ position: "absolute", left: "200px", top: "14px" }}
+                onClick={() => dispatch(decrementQuantity(cartItem))}
               />
-            </StyledCardItemQuantity>
-            <StyledCardItemTotal>
-              {cartItem.quantity * 100} $
-            </StyledCardItemTotal>
+            </Col>
+            <Col span={6}>{cartItem.quantity * 100} $</Col>
           </StyledCardItem>
         );
       })}

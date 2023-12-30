@@ -1,4 +1,4 @@
-import { Card, Typography, Empty } from "antd";
+import { Empty } from "antd";
 import { Doughnut } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
 import Chart from "chart.js/auto";
@@ -8,7 +8,6 @@ import { productsSelector } from "../../app/products/selector";
 import { StyledCard } from "./styles";
 import { StyledEmpty } from "../barChart/styles";
 
-const Text = Typography;
 Chart.register(CategoryScale);
 const DoughnutChart = () => {
   const { totalOrders } = useSelector(productsSelector);

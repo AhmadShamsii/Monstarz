@@ -1,25 +1,26 @@
 import styled from "styled-components";
-import { Typography, Card, Button, Modal, Space } from "antd";
+import { Typography, Card, Button, Modal, Space, Row } from "antd";
 const Text = Typography;
 const Title = Typography;
 
-export const StyledCardHeader = styled(Card)`
-  width: 80%;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-bottom: 20px;
+export const StyledCardHeader = styled(Row)`
+  text-align: center;
+  margin: 1% 12%;
+  padding: 10px 0;
   background-color: white;
   border-radius: 5px;
   font-size: 25px;
-
   font-weight: bold;
   font-family: "Bigelow Rules", cursive;
 `;
-export const StyledCardItem = styled(Card)`
-  width: 80%;
+export const StyledCardItem = styled(Row)`
   display: flex;
-  margin: 20px 215px 0px 140px;
+  align-items: center;
+  text-align: center;
+  margin: 1% 12%;
+  padding: 20px 0;
   background-color: white;
+  font-size: 20px;
 `;
 export const StyledCardItemName = styled(Text)`
   font-size: 20px;

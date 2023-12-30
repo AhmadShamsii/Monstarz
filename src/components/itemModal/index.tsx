@@ -1,4 +1,4 @@
-import { Modal, Avatar, Space, Typography } from "antd";
+import { Modal,  Space, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   PlusCircleOutlined,

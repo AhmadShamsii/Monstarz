@@ -9,7 +9,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Layout from "./components/layout";
 import About from "./routes/about";
 import Contact from "./routes/contact";
-import Home from "./components/home";
+import Home from "./routes/home";
 import Monsters from "./routes/monsters";
 import Shop from "./routes/shop";
 import Robots from "./routes/robots";
@@ -30,7 +30,6 @@ const App = () => {
   }, []);
 
   const helmetContext = {};
-
 
   return (
     <HelmetProvider context={helmetContext}>

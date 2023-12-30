@@ -21,7 +21,8 @@ export const StyledSpace2 = styled(Space)`
 `;
 export const StyledOrdersCard = styled(Card)`
   width: 80%;
-  margin-left: 18.5%;
+  margin-left: 17%;
   margin-right: 5%;
   margin-top: 20px;
+  border-radius: 10px;
 `;
