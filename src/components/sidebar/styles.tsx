@@ -12,8 +12,8 @@ export const StyledSider = styled(Sider)`
   font-size: 20px;
 `;
 export const StyledMenu = styled(Menu)`
-font-size: 15.5px
-background-color: white
+  font-size: 15.5px;
+  background-color: white;
 `;
 export const StyledMenuItem = styled(Menu.Item)`
   background-color: #f8f9fa;
