@@ -118,9 +118,10 @@ export const StyledButtonDropdown1 = styled(Button)`
 export const StyledUserOutlined = styled(UserOutlined)`
   font-size: 24px;
   color: #f8f9fa;
-  margin-right: 22px;
-  position: relative;
-  right: 100%;
+  margin-right: 75px;
+  margin-top: 15px;
+  /* position: relative; */
+  /* right: 110%; */
 `;
 export const StyledEmptyHeartFilled = styled(HeartFilled)`
   font-size: 40px;

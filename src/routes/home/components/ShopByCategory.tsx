@@ -5,6 +5,7 @@ import {
   StyledCategoryTitle,
   StyledDivider,
   StyledSpace,
+  StyledSpace2,
 } from "../styles";
 
 const ShopByCatgory = () => {
@@ -20,7 +21,7 @@ const ShopByCatgory = () => {
       >
         Shop By Category
       </StyledDivider>
-      <Space style={{ margin: "0 10%" }}>
+      <StyledSpace2 style={{ margin: "0 10%" }}>
         <StyledSpace>
           <Link to="shop/monsters">
             <StyledCategoryCard
@@ -65,7 +66,7 @@ const ShopByCatgory = () => {
             </StyledCategoryCard>
           </Link>
         </StyledSpace>
-      </Space>
+      </StyledSpace2>
     </>
   );
 };

@@ -40,29 +40,28 @@ export const StyledCarousel = styled(Carousel)`
 export const StyledTitle = styled(Title)`
   color: #f6f2f8;
   font-size: 90px;
-  width: 200%;
+  width: 100vw;
   margin-top: 17vh;
-  margin-left: 33%;
+  margin-left: 10%;
   font-family: "Bigelow Rules", cursive;
 `;
 export const StyledAvatar1 = styled(Avatar)`
   position: relative;
   top: 0px;
-  right: -320px;
+  right: 820px;
 `;
 export const StyledAvatar2 = styled(Avatar)`
   position: relative;
   bottom: 50px;
-  left: 80px;
+  left: -1050px;
 `;
 export const StyledAvatar3 = styled(Avatar)`
   position: relative;
   bottom: 100px;
-  left: -80px;
+  left: -1220px;
 `;
 export const StyledButton = styled(Button)`
   font-size: 18px;
-  width: 135px;
   height: auto;
   margin-left: 10%;
   color: #f6f2f8;
@@ -89,19 +88,17 @@ export const StyledText2 = styled(Text)`
 export const StyledAvatar = styled(Avatar)`
   background-color: #0d3b66;
   position: relative;
-  left: 63%;
+  left: 53%;
   bottom: 280px;
 `;
 export const StyledButton1 = styled(Button)`
   font-size: 18px;
   width: 170px;
   height: auto;
-  position: absolute;
-  margin-left: -240px;
   background-color: #0d3b66;
   color: #f6f2f8;
-  margin-top: 31px;
-
+  /* margin-top: 31px; */
+  margin-left: 10%;
   &:hover {
     background-color: #123456;
     color: #ffffff;
